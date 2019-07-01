@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?> -->
+<!-- <?rfc-ext refresh-from="draft-ietf-roll-nsa-extension-01.xml" refresh-interval="2"?> -->
+<!-- <?rfc toc="yes"?> -->
+<!-- <?rfc-ext support-rfc2731="yes"?> -->
+<!-- <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [ -->
+<!--  <!ENTITY rfc2616 SYSTEM -->
+<!--   "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml"> -->
+<!-- ]> -->
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="no"?>
+<?rfc subcompact="no"?>
+<?rfc authorship="yes"?>
+<?rfc tocappendix="yes"?>
+
+<!-- <rfc category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-02" xmlns:x="http://purl.org/net/xml2rfc/ext">  -->
+<rfc category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-03"> 
+
+
+<front> 
+
+    <title abbrev="RPL MC NSA object type extension"> 
+    RPL DAG Metric Container Node State and Attribute object type extension
+    </title>
+   
+   
+   
+
+    <author initials="R.-A." surname="Koutsiamanis" fullname="Remous-Aris Koutsiamanis" role="editor">
+      <organization>IMT Atlantique</organization>
+      <address>         
+        <postal>            
+           <street>Office B00 - 126A</street>
+           <street>2 Rue de la Chataigneraie</street>
+           <city>Cesson-Sevigne - Rennes</city>
+            <code>35510</code>
+            <country>FRANCE</country>
+         </postal>
+         <phone>+33 299 12 70 49</phone>
+    <email>aris@ariskou.com</email>
+      </address>
+    </author>
+
+
+    <author initials="G.Z." surname="Papadopoulos" fullname="Georgios Papadopoulos">
+      <organization>IMT Atlantique</organization>
+      <address>
+         <postal>
+            <street>Office B00 - 114A</street>
+            <street>2 Rue de la Chataigneraie</street>
+            <city>Cesson-Sevigne - Rennes</city>
+            <code>35510</code>
+            <country>FRANCE</country>
+         </postal>
+         <phone>+33 299 12 70 04</phone>         
+    <email>georgios.papadopoulos@imt-atlantique.fr</email>
+      </address>
+    </author>
+
+
+    <author initials="N." surname="Montavont" fullname="Nicolas Montavont">
+      <organization>IMT Atlantique</organization>
+      <address>
+         <postal>
+            <street>Office B00 - 106A</street>
+            <street>2 Rue de la Chataigneraie</street>
+            <city>Cesson-Sevigne - Rennes</city>
+            <code>35510</code>
+            <country>FRANCE</country>
+         </postal>
+         <phone>+33 299 12 70 23</phone>
+    <email>nicolas.montavont@imt-atlantique.fr</email>
+      </address>
+    </author>   
+      
+     
+   <author initials="P" surname="Thubert" fullname="Pascal Thubert">   
+      <organization abbrev="Cisco">Cisco Systems, Inc</organization>
+      <address>
+         <postal>
+            <street>Building D</street>
+            <street>45 Allee des Ormes - BP1200 </street>
+            <city>MOUGINS - Sophia Antipolis</city>
+            <code>06254</code>
+            <country>FRANCE</country>
+         </postal>
+         <phone>+33 497 23 26 34</phone>
+         <email>pthubert@cisco.com</email>
+      </address>
+    </author>    
+
+   <date/>
+
+   <workgroup>ROLL</workgroup>
+
+   <abstract>
+   <t>
+        Implementing Packet Replication and Elimination from / to the RPL root requires
+        the ability to forward copies of packets over different paths via different RPL parents.
+        Selecting the appropriate parents to achieve ultra-low latency and jitter requires information
+        about a node's parents.
+        This document details what information needs to be transmitted and how it is encoded within a packet to enable this
+        functionality.
+   </t>
+   </abstract>
+   
+
+</front>
+
+<middle>
+
+
+
+<!--section title="TEMPORARY EDITORIAL NOTES">
+
+   <t>
+		This document is an Internet Draft, so it is work-in-progress by nature.
+   		It contains the following work-in-progress elements:
+   </t>	
+     		 
+   <t>
+   	<list style="symbols">
+		<t>"TODO" statements are elements which have not yet been written by the authors 
+		for some reason (lack of time, ongoing discussions with no clear consensus, etc).
+		The statement does indicate that the text will be written at some time.</t>
+   	</list>
+   </t>
+   		 
+</section --> 
+
+
+
+<section title="Introduction">
+    <t>
+        Network-enabled applications in the industrial context must provide stringent guarantees in terms of reliability and predictability.
+        To achieve this they typically leverage 1+1 redundancy, also known as <xref target="I-D.papadopoulos-6tisch-pre-reqs">Packet Replication and Elimination (PRE)</xref>.
+        
+        Allowing these kinds of applications to function over wireless networks requires the application of the principles of <xref target="I-D.ietf-detnet-architecture">Deterministic Networking</xref>.
+        This results in designs which aim at maximizing packet delivery rate and minimizing latency and jitter.
+
+        Additionally, given that the network nodes often do not have an unlimited power supply, energy
+        consumption needs to be minimized as well.
+    </t>
+
+
+    <t>  
+        As an example, to meet this goal, <xref target="IEEE802154-2015">IEEE Std. 802.15.4</xref> provides Time-Slotted Channel Hopping (TSCH), a mode of operation which uses a common communication schedule
+based on timeslots to allow deterministic medium access as well as channel hopping to work around radio interference.
+        However, since TSCH uses retransmissions in the event of a failed transmission, end-to-end delay and jitter performance can deteriorate.
+   </t>
+   
+   
+   <t>
+        Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on the issues previously
+        highlighted and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to
+        address that case.
+        
+        Building on this architecture, <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>
+        leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and to limit jitter.
+   </t>
+   
+   <t>
+        PRE is a general method of maximizing packet delivery rate and potentially minimizing latency and jitter, not limited to  6TiSCH.
+        More specifically, PRE achieves controlled redundancy by laying multiple forwarding paths through the network and using them in parallel
+        for different copies of a same packet.
+        
+        PRE can follow the Destination-Oriented Directed Acyclic Graph (DODAG) formed by RPL from a node to the root. 
+        Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, 
+        a subset of which is used to forward packets.
+        In order for this subset to be defined, a RPL parent subset selection mechanism, which is among the responsibilities of the RPL Objective Function (OF), needs to have specific path information.
+        This document focuses on the specification of the transmission of this specific path information.
+   </t>
+
+   <t>
+		More concretely, this specification focuses on the extensions to the <xref target="RFC6551">DAG Metric Container</xref> required for 
+		providing the PRE mechanism a part of the information it needs to operate.
+		This information is the <xref target="RFC6550">RPL</xref> parent address set of a node and it must be sent to potential children of the node. 
+		The RPL DIO Control Message is the canonical way of broadcasting
+		this kind of information and therefore its <xref target="RFC6551">DAG Metric Container</xref> field is used to append a Node State and Attribute (NSA) object.
+		The node's parent address set is stored as an optional TLV within the NSA object.
+		This specification defines the type value and structure for the parent address set TLV.
+    </t>	
+
+</section> 
+
+  
+
+
+<section title="Terminology">
+
+    <t>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", 
+        "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be 
+        interpreted as described in <xref target="RFC2119"/>.
+    </t>
+    
+    <t>
+        The draft uses the following Terminology:
+        <list style="hanging">
+<!--             <t hangText="Track"> -->
+<!--                 A sequence of 6TiSCH schedule resources to support a single-path multi-hop transmission of a packet. -->
+<!--                 See <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> for more. -->
+<!--             </t> -->
+<!--             <t hangText="Complex Track"> -->
+<!--                 A Track which supports a multi-path multi-hop transmission of a packet. -->
+<!--                 See <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> for more. -->
+<!--             </t> -->
+            <t hangText="Packet Replication and Elimination (PRE):">
+                A method which transmits multiple copies of a packet using multi-path forwarding over a multi-hop network and which consolidates multiple received packet copies
+to control flooding.
+                See <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref> for more details.
+            </t>
+            <t hangText="Alternative Parent (AP) Selection:">
+                The mechanism for choosing the next hop node to forward a packet copy when replicating packets.
+            </t>
+        </list>
+    </t>
+</section>
+
+<section title="Alternative Parent Selection">
+    <t>
+		In the RPL protocol, each node maintains a list of potential parents. 
+		For PRE, the Preferred Parent (PP) node is defined to be the same as the RPL DODAG Preferred Parent node. 
+		Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network registers an AP node as well from its Parent Set (PS).
+		There are multiple alternative methods of selecting the AP node. This functionality is included in the operation of the RPL Objective Function (OF).
+		A scheme which allows the two paths to remain correlated is detailed here.
+		More specifically, in this scheme a node will select an AP node close to its PP node to allow the operation of overhearing between parents. 
+        For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>.
+		If multiple potential APs match this condition, the AP with the lowest rank will be registered.
+    </t>
+    
+    <t>
+        There are at least three methods of performing the AP selection based on common ancestors (CA), named Common Ancestor Strict, Common Ancestor Medium, and Common Ancestor Relaxed, depending on how restrictive the selection process is.
+        A more restrictive method will limit flooding but might fail to select an appropriate AP, while a less restrictive one will more often find an appropriate AP but might increase flooding.
+    </t>
+    
+    <section title="Common Ancestor Strict" anchor="sec_ca_strict">
+        <t>
+            In CA Strict, the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is the same as the PP of the potential AP. 
+        </t>
+        
+        
+            <figure title="Example Common Ancestor Strict Alternative Parent Selection method" anchor="fig_ca_alternative_parent_selection">
+<artwork><![CDATA[
+
+               (  R  ) root              
+                  .                      PS(S) = {A, B, C, D}
+                  .                      PP(S) = C
+                  .                      PP(PP(S)) = Y          
+                  .                                          
+                                         PS(A) = {W, X}      
+  ( W )    ( X )    ( Y )    ( Z )       PP(A) = X               
+    ^ ^   ^^ ^ ^    ^^^^ ^   ^ ^^                                
+    |  \ //  |  \ //  ||  \ /  ||        PS(B) = {W, X, Y}      
+    |   //   |   //   ||   /   ||        PP(B) = Y                            
+    |  // \  |  // \  ||  / \  ||                                
+    | //   \ | //   \ || /   \ ||        PS(C) = {X, Y, Z}      
+  ( A )    ( B )    ( C )    ( D )       PP(C) = Y               
+      ^        ^      ^^     ^                                    
+       \        \     ||    /            PS(D) = {Y, Z}        
+         \       \    ||   /             PP(D) = Z                            
+           \      \   ||  /                   
+             \----\\  || /               || Preferred Parent
+                  (   S   ) source       |  Potential Alternative Parent
+]]></artwork>                                   
+            </figure>
+        <t> 
+            For example, in <xref target="fig_ca_alternative_parent_selection"/>, the source node S must know its grandparent sets through nodes A, B, C, and D.
+            The Parent Sets (PS) and the Preferred Parents (PS) of nodes A, B, C, and D are shown on the side of the figure.
+            The CA Strict parent selection method will select an AP for node S for which PP(PP(S)) = PP(AP).
+            Given that PP(PP(S)) = Y:
+            <list style="symbols">
+                <t>
+                    Node A: PP(A) = X and therefore it is different than PP(PP(S))
+                </t>
+                <t>
+                    Node B: PS(B) = Y and therefore it is equal to PP(PP(S))
+                </t>
+                <t>
+                    Node D: PS(D) = Z and therefore it is different than PP(PP(S))
+                </t>
+            </list>
+            
+            node S can decide to use node B as its AP node, since PP(PP(S)) = Y = PP(B).
+        </t>    
+    </section>
+    
+    <section title="Common Ancestor Medium" anchor="sec_ca_medium">
+        <t>
+            In CA Medium, the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is contained in the PS of the potential AP. 
+        </t>
+        
+        <t> 
+            Using the same example, in <xref target="fig_ca_alternative_parent_selection"/>, the CA Medium parent selection method will select an AP for node S for which PP(PP(S)) is in PS(AP).
+            
+            Given that PP(PP(S)) = Y:
+            <list style="symbols">
+                <t>
+                    Node A: PS(A) = {W, X} and therefore PP(PP(S)) is not in the set
+                </t>
+                <t>
+                    Node B: PS(B) = {W, X, Y} and therefore PP(PP(S)) is in the set
+                </t>
+                <t>
+                    Node D: PS(D) = {Y, Z} and therefore PP(PP(S)) is in the set
+                </t>
+            </list>
+            
+            node S can decide to use node B or D as its AP node.
+        </t>    
+    </section>    
+        
+    <section title="Common Ancestor Relaxed" anchor="sec_ca_relaxed">
+        <t>
+            In CA Relaxed, the node will check if the Parent Set (PS) of its Preferred Parent (PP) has a node in common with the PS of the potential AP. 
+        </t>
+        
+        <t> 
+            Using the same example, in <xref target="fig_ca_alternative_parent_selection"/>, the CA Relaxed parent selection method will select an AP for node S for which PS(PP(S)) has at least one node in common with PS(AP).
+            Given that PS(PP(S)) = {X, Y, Z}:
+            <list style="symbols">
+                <t>
+                    Node A: PS(A) = {W, X} and the common nodes are {X}
+                </t>
+                <t>
+                    Node B: PS(B) = {W, X, Y} and the common nodes are {X, Y}
+                </t>
+                <t>
+                    Node D: PS(D) = {Y, Z} and the common nodes are {Y, Z}
+                </t>
+            </list>
+            
+            node S can decide to use node A, B or D as its AP node.
+        </t>    
+    </section>
+    
+    <section title="Usage">
+        <t>
+            The PS information can be used by any of the described AP selection methods or other ones not described here, depending on requirements.
+            This document does not suggest a specific AP selection method. 
+            Additionally, it is optional for all nodes to use the same AP selection method.
+            Different nodes may use different AP selection methods, since the selection method is local to each node.
+            For example, using different methods can be used to vary the transmission reliability in each hop. 
+        </t>
+    </section>    
+
+</section>
+
+<section title="Node State and Attribute (NSA) object type extension">
+        <t>
+            In order to select their AP node, nodes need to be aware of their grandparent node sets. 
+            Within <xref target="RFC6550">RPL</xref>, the nodes use the DODAG Information Object (DIO) Control Message to broadcast information 
+            about themselves to potential children.
+            However, <xref target="RFC6550">RPL</xref>, does not define how to propagate parent set related information, which is what this document addresses. 
+        </t>
+    	<t> 
+        	DIO messages can carry multiple options, out of which the <xref target="RFC6551">DAG Metric Container option</xref> 
+        	is the most suitable structurally and semantically for the purpose of carrying the parent set.
+        	The DAG Metric Container option itself can carry different nested objects, out of which the 
+        	<xref target="RFC6551">Node State and Attribute (NSA)</xref> is appropriate for transferring generic node state data.
+        	Within the Node State and Attribute it is possible to store optional TLVs representing various node characteristics.
+        	As per the <xref target="RFC6551">Node State and Attribute (NSA)</xref> description, no TLV has been defined for use.
+        	This document defines one TLV for the purpose of transmitting a node's parent set.
+    	</t>
+        <figure title="Example DIO Message with a DAG Metric Container option" anchor="fig_dio">
+<artwork><![CDATA[
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| RPLInstanceID |Version Number |             Rank              |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|G|0| MOP | Prf |     DTSN      |     Flags     |   Reserved    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
++                                                               +
+|                                                               |
++                            DODAGID                            +
+|                                                               |
++                                                               +
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| DAGMC Type (2)| DAGMC Length  |                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               |
+|                                                               |
+//                   DAG Metric Container data                 //
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+]]></artwork>
+        </figure>
+        <t>
+            <xref target="fig_dio"/> shows the structure of the DIO Control Message when a DAG Metric Container option is included.
+            The DAG Metric Container option type (DAGMC Type in <xref target="fig_dio"/>) has the value 0x02 as per the 
+            IANA registry for the RPL Control Message Options, and is defined in <xref target="RFC6550"/>.
+            The DAG Metric Container option length (DAGMC Length in <xref target="fig_dio"/>) expresses the DAG Metric Container length in bytes.
+            DAG Metric Container data holds the actual data and is shown expanded in <xref target="fig_dagmc"/>.
+        </t>
+        
+        <figure title="DAG Metric Container (MC) data with Node State and Attribute (NSA) object body and a TLV" anchor="fig_dagmc">
+<artwork><![CDATA[
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|Routing-MC-Type|Res Flags|P|C|O|R| A   |  Prec | Length (bytes)| |MC
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Res       |  Flags    |A|O|    PS  type   |   PS  Length  | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ |NSA
+|   6LoRH type  | 6LoRH-compressed PS IPv6 address(es) ...        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+]]></artwork>
+        </figure>
+        <t>
+            The structure of the DAG Metric Container data in the form of a Node State and Attribute (NSA) object with a TLV in the NSA Optional TLVs field is shown in <xref target="fig_dagmc"/>.
+            The first 32 bits comprise the DAG Metric Container header and all the following bits are part of the Node State and Attribute object body, as defined in <xref target="RFC6551"/>.
+            This document defines a new TLV, which CAN be carried in the Node State and Attribute (NSA) object Optional TLVs field. 
+            The TLV is named Parent Set and is abbreviated as PS in <xref target="fig_dagmc"/>.
+            <list style="hanging" hangIndent="6">
+                <t hangText="PS type:">
+                    The type of the Parent Set TLV.
+                    The value is TBD1.
+                </t>
+                <t hangText="PS Length:">
+                    The total length of the TLV value field (PS IPv6 address(es)) in bytes.
+                </t>
+                <t hangText="6LoRH type:">
+                    The type of 6LoRH compression applied to the PS IPv6 addresses.
+                    For detailed usage see Section 5.1 of <xref target="RFC8138"/>.
+                    
+                    As an overview, the compressed size of each IPv6 address in the "6LoRH-compressed PS IPv6 address(es)" field depending on the value of "6LoRH type" is shown in <xref target="fig_6lorh_type"/>.  
+
+                </t>
+            </list>                
+        </t>
+        <figure title="The SRH-6LoRH Types" anchor="fig_6lorh_type">
+<artwork><![CDATA[
+             +-----------+----------------------+
+             |   6LoRH   | Length of compressed |
+             |   Type    | IPv6 address (bytes) |
+             +-----------+----------------------+
+             |    0      |       1              |
+             |    1      |       2              |
+             |    2      |       4              |
+             |    3      |       8              |
+             |    4      |      16              |
+             +-----------+----------------------+                
+
+]]></artwork>
+        </figure>
+        <t>
+            <list style="hanging" hangIndent="6">    
+                <t hangText="6LoRH-compressed PS IPv6 address(es):">
+                    A sequence of zero or more IPv6 addresses belonging to a node's parent set.
+                    Each address requires 16 bytes.
+                    The order of the parents in the parent set is in decreasing preference based on 
+                    the <xref target="RFC6550">Objective Function</xref> used by the node. 
+                </t>
+            </list>
+        </t>
+
+
+    <section title="Usage">
+        <t>
+            The PS SHOULD be used in the process of parent selection, and especially in AP selection, since it can help the alternative path to not significantly deviate from the preferred path.
+            The Parent Set is information local to the node that broadcasts it.
+        </t>
+        
+        <t>
+            The PS is used only within NSA objects configured as constraints and is used as per <xref target="RFC6551"/>.
+        </t>
+            
+        <!--<section title="DAG Metric Container fields">
+            <t>
+                Given the intended usage, when using the PS, the NSA object it is contained in MUST be used as a constraint in the DAG Metric Container.
+                More specifically, using the PS places the following requirements on the DAG Metric Container header fields:
+                <list style="symbols">
+                    <t>
+                        'P' flag: MUST be cleared, since PS is used only with constraints.
+                    </t>
+                    <t>
+                        'C' flag:  MUST be set, since PS is used only with constraints.
+                    </t>
+                    <t>
+                        'O' flag: Used as per <xref target="RFC6551"/>, to indicated optionality.
+                    </t>
+                    <t>
+                        'R' flag: Used as per <xref target="RFC6551"/>.
+                    </t>
+                    <t>
+                        'A' Field: Used as per <xref target="RFC6551"/>.
+                    </t>
+                    <t>
+                        'Prec' Field: Used as per <xref target="RFC6551"/>.
+                    </t>
+                </list>
+            </t>
+        </section>
+        
+        <section title="Node State and Attribute fields">
+            <t>
+                For clarity reasons, the usage of the PS places no additional restrictions on the NSA flags ('A' and 'O'), which can be used as normally defined in <xref target="RFC6551"/>.
+            </t>
+        </section>-->
+    </section>
+        
+    <!-- Talk  about compression options to reduce IPv6 address sizes -->
+    <section title="Compression">
+        <t>
+            The PS IPv6 address(es) field in the Parent Set TLV add overhead due to their size.
+            Therefore, compression is highly desirable in order for this extension to be usable.
+            To meet this goal, a good compression method candidate is <xref target="RFC8138"/> 6LoWPAN Routing Header (6LoRH).
+            Furthermore, the PS IPv6 address(es) belong by definition to nodes in the same RPL DODAG and are stored in the form of a list of addresses.
+            This makes this field a good candidate for the use of the same compression as in Source Routing Header 6LoRH (SRH-6LoRH), achieving efficiency and implementation reuse.
+            Therefore, the PS IPv6 address(es) field SHOULD be compressed using the compression method for Source Routing Header 6LoRH (SRH-6LoRH) <xref target="RFC8138"/>.
+        </t>
+    </section>    
+</section>
+
+<section title="Controlling PRE">
+   
+    <t>
+        PRE is very helpful when the aim is to increase reliability for a certain path, however its use creates additional traffic as part of the replication process.
+        It is conceivable that not all paths have stringent reliability requirements. 
+        Therefore, a way to control whether PRE is applied to a path's packets SHOULD be implemented.
+        For example, a traffic class label can be used to determine this behaviour per flow type as described in <xref target="I-D.ietf-detnet-architecture">Deterministic Networking Architecture</xref>.   
+    </t>
+
+    
+</section>
+
+<section title="Security Considerations">
+   
+    <t>
+        The structure of the DIO control message is extended, within the pre-defined DIO options.
+        Therefore, the security mechanisms defined in <xref target="RFC6550">RPL</xref> apply to this proposed extension.
+    </t>
+
+    
+</section>
+
+
+
+<section title="IANA Considerations">
+    <t>
+        This proposal requests the allocation of a new value TBD1 for the "Parent Set" TLV in the Routing Metric/Constraint TLVs sub-registry from IANA.
+    </t>
+            
+</section>
+
+
+
+  <?rfc compact="yes" ?>
+
+<!-- <section title="Acknowledgments">
+  		<t>
+  			TODO: We are grateful to XXXX YYYYY and KKKK LLLL for their comments that 
+  			lead to many improvements to this document. 
+  		</t>
+</section> -->
+
+
+
+</middle>
+
+
+
+
+ <back>
+<!--  <references title="Normative References"> 
+  </references> -->
+
+  <references title="Informative references">
+        <?rfc include='reference.RFC.2119'?>
+        <?rfc include="reference.RFC.6550"?> 						<!-- RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks -->
+        <?rfc include="reference.RFC.6551"?> 						<!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
+        <?rfc include="reference.RFC.8138"?>                        <!-- IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing Header -->        
+        <!-- <?rfc include="reference.RFC.8180"?> -->			    <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
+		<?rfc include='reference.I-D.ietf-6tisch-architecture'?>	<!-- 6TiSCH: 6TiSCH architecture -->
+		<!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> --> <!-- 6TiSCH: 6top protocol -->
+		<?rfc include='reference.I-D.ietf-detnet-architecture'?>	<!-- DetNet: DetNet architecture -->
+		<?rfc include='reference.I-D.papadopoulos-6tisch-pre-reqs'?>	<!-- Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs -->
+        
+        
+  </references>
+  
+  <references title="Other Informative References">
+  	<reference anchor="IEEE802154-2015">
+    	<front>
+        	<title>
+        	   IEEE Std 802.15.4-2015 Standard for Low-Rate Wireless Personal Area Networks (WPANs)
+        	</title>
+            <author>
+               <organization>IEEE standard for Information Technology</organization>
+            </author>
+            <date year="2015" month="December"/>
+        </front>
+    </reference>
+  </references>
+  
+  
+  <section title="Implementation Status">
+      <t>
+        A research-stage implementation of the PRE mechanism using the proposed extension as part of a 6TiSCH IOT use case was developed at IMT Atlantique, France by Tomas Lagos Jenschke and Remous-Aris Koutsiamanis.
+        It was implemented on the open-source Contiki OS and tested with the Cooja simulator.
+        The DIO DAGMC NSA extension is implemented with a configurable number of parents from the parent set of a node to be reported.
+      </t>
+      
+        <figure title="Simulation Topology" anchor="fig_sim_topology">
+<artwork><![CDATA[
+                 ( R )              
+              
+
+(11)   (12)   (13)   (14)   (15)   (16)        
+                                 
+                                 
+(21)   (22)   (23)   (24)   (25)   (26)        
+                                 
+                                 
+(31)   (32)   (33)   (34)   (35)   (36)        
+                                 
+                                 
+(41)   (42)   (43)   (44)   (45)   (46)        
+                                 
+                                 
+(51)   (52)   (53)   (54)   (55)   (56)
+
+ 
+                 ( S )        
+]]></artwork>
+        </figure>      
+      
+      <t>
+        The simulation setup is:
+        <list style="hanging">
+            <t hangText="Topology:">
+                32 nodes structured in regular grid as show in <xref target="fig_sim_topology"/>. 
+                Node S (source) is the only data packet sender, and send data to node R (root).
+                The parent set of each node (except R) is all the nodes in the immediately higher row, the immediately above 6 nodes.
+                For example, each node in {51, 52, 53, 54, 55, 56} is connected to all of {41, 42, 43, 44, 45, 46}.
+                Node 11, 12, 13, 14, 15, 16 have a single upwards link to R.   
+            </t>
+            <t hangText="MAC:">
+               TSCH with 1 retransmission
+            </t>
+            <t hangText="Platform:">
+               Cooja 
+            </t>
+            <t hangText="Schedule:">
+               Static, 2 timeslots per link from each node to each parent in its parent set, 1 broadcast EB slot, 1 sender-based shared timeslot (for DIO and DIS) per node (total of 32).
+            </t>
+            <t hangText="Simulation lifecycle:">
+               Allow link formation for 100 seconds before starting to send data packets.
+               Afterwards, S sends data packets to R.
+               The simulation terminates when 1000 packets have been sent by S. 
+            </t>
+            <t hangText="Radio Links:">
+               Every 60 s, a new Packet Delivery Rate is randomly drawn for each link, with a uniform distribution spanning the 70% to 100% interval. 
+            </t>
+            <t hangText="Traffic Pattern:">
+                CBR, S sends one non-fragmented UDP packet every 5 seconds to R.
+            </t>
+            <t hangText="PS extension size:">
+                3 parents.
+            </t>
+            <t hangText="Routing Methods:">
+                <list style="symbols">
+                    <t>
+                        RPL: The default RPL non-PRE implementation in Contiki OS.
+                    </t>
+                    <t>
+                        2nd ETX: PRE with a parent selection method which picks as AP the 2nd best parent in the parent set based on ETX.
+                    </t>
+                    <t>
+                        CA Strict: As described in <xref target="sec_ca_strict"/>. 
+                    </t>
+                    <t>
+                        CA Medium: As described in  <xref target="sec_ca_medium"/>. 
+                    </t>
+                </list>
+            </t>
+        </list> 
+      </t>
+      
+      <texttable>
+        <preamble>
+            Simulation results: 
+        </preamble>
+        <ttcol>
+            Routing Method
+        </ttcol>
+        <ttcol align="right">
+            Average Packet Delivery Rate (%)
+        </ttcol>
+        <ttcol align="right">
+            Average Traversed Nodes/packet (#)
+        </ttcol>
+        <ttcol align="right">
+            Average Duplications/packet (#)
+        </ttcol>
+        <c>RPL</c>
+        <c>82.70</c>
+        <c>5.56</c>
+        <c>7.02</c>
+
+        <c>2nd ETX</c>
+        <c>99.38</c>
+        <c>14.43</c>
+        <c>31.29</c>
+      
+        <c>CA Strict</c>
+        <c>97.32</c>
+        <c>9.86</c>
+        <c>18.23</c>
+
+        <c>CA Medium</c>
+        <c>99.66</c>
+        <c>13.75</c>
+        <c>28.86</c>
+      
+      </texttable>
+      
+      <t>
+        Links:
+        <list style="symbols">
+            <t>
+                <eref target="https://github.com/ariskou/contiki/tree/draft-koutsiamanis-roll-nsa-extension">Contiki OS DIO DAGMC NSA extension (draft-koutsiamanis-roll-nsa-extension branch)</eref>
+            </t>
+            <t>
+                <eref target="https://code.wireshark.org/review/gitweb?p=wireshark.git;a=commit;h=e2f6ba229f45d8ccae2a6405e0ef41f1e61da138">Wireshark dissectors (for the optional PS TLV) - currently merged / in master</eref>
+            </t>
+        </list>
+      </t>
+      
+  </section>
+     
+</back> 
+</rfc>
