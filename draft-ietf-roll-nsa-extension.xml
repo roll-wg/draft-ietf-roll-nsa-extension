@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="US-ASCII"?>
-<!-- <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?> -->
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
 <!-- <?rfc-ext refresh-from="draft-ietf-roll-nsa-extension-01.xml" refresh-interval="2"?> -->
 <!-- <?rfc toc="yes"?> -->
 <!-- <?rfc-ext support-rfc2731="yes"?> -->
@@ -22,9 +22,7 @@
 <?rfc authorship="yes"?>
 <?rfc tocappendix="yes"?>
 
-<!-- <rfc category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-02" xmlns:x="http://purl.org/net/xml2rfc/ext">  -->
-<rfc category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-03"> 
-
+<rfc category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-03">
 
 <front> 
 

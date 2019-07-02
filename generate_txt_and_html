@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+XML2RFC_BIN=$( which xml2rfc )
+if [ -z "${XML2RFC_BIN}" ]
+then
+    echo "Could not find xml2rfc in the PATH. Exiting."
+    exit 1
+fi
+
+GREP_BIN=$( which grep )
+if [ -z "${GREP_BIN}" ]
+then
+    echo "Could not find grep in the PATH. Exiting."
+    exit 1
+fi
+
+DRAFT_BASENAME=$( grep -oP 'docName=".*"' < draft-ietf-roll-nsa-extension.xml | grep -oP 'draft-[^"]+' )
+echo "Found ${DRAFT_BASENAME}"
+xml2rfc --text --html --basename="${DRAFT_BASENAME}" draft-ietf-roll-nsa-extension.xml
