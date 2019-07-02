@@ -14,6 +14,6 @@ then
     exit 1
 fi
 
-DRAFT_BASENAME=$( grep -oP 'docName=".*"' < draft-ietf-roll-nsa-extension.xml | grep -oP 'draft-[^"]+' )
+DRAFT_BASENAME=$( grep -oE 'docName="[^"]*"' < draft-ietf-roll-nsa-extension.xml | grep -oE 'draft-[^"]+' )
 echo "Found ${DRAFT_BASENAME}"
 xml2rfc --text --html --basename="${DRAFT_BASENAME}" draft-ietf-roll-nsa-extension.xml
