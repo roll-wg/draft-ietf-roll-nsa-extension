@@ -102,12 +102,9 @@
 
    <abstract>
    <t>
-        Implementing Packet Replication and Elimination from / to the RPL root requires
-        the ability to forward copies of packets over different paths via different RPL parents.
-        Selecting the appropriate parents to achieve ultra-low latency and jitter requires information
-        about a node's parents.
-        This document details what information needs to be transmitted and how it is encoded within a packet to enable this
-        functionality.
+        Implementing Packet Replication and Elimination from / to the RPL root requires the ability to forward copies of packets over different paths via different RPL parents.
+        Selecting the appropriate parents to achieve ultra-low latency and jitter requires information about a node's parents.
+        This document details what information needs to be transmitted and how it is encoded within a packet to enable this functionality.
    </t>
    </abstract>
    
@@ -145,8 +142,7 @@
         Allowing these kinds of applications to function over wireless networks requires the application of the principles of <xref target="I-D.ietf-detnet-architecture">Deterministic Networking</xref>.
         This results in designs which aim at maximizing packet delivery rate and minimizing latency and jitter.
 
-        Additionally, given that the network nodes often do not have an unlimited power supply, energy
-        consumption needs to be minimized as well.
+        Additionally, given that the network nodes often do not have an unlimited power supply, energy consumption needs to be minimized as well.
     </t>
 
 
@@ -158,32 +154,25 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
    
    
    <t>
-        Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on the issues previously
-        highlighted and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to
-        address that case.
+        Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on the issues previously highlighted and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to address that case.
         
-        Building on this architecture, <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>
-        leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and to limit jitter.
+        Building on this architecture, <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref> leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and to limit jitter.
    </t>
    
    <t>
-        PRE is a general method of maximizing packet delivery rate and potentially minimizing latency and jitter, not limited to  6TiSCH.
-        More specifically, PRE achieves controlled redundancy by laying multiple forwarding paths through the network and using them in parallel
-        for different copies of a same packet.
+        PRE is a general method of maximizing packet delivery rate and potentially minimizing latency and jitter, not limited to 6TiSCH.
+        More specifically, PRE achieves controlled redundancy by laying multiple forwarding paths through the network and using them in parallel for different copies of a same packet.
         
         PRE can follow the Destination-Oriented Directed Acyclic Graph (DODAG) formed by RPL from a node to the root. 
-        Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, 
-        a subset of which is used to forward packets.
+        Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, a subset of which is used to forward packets.
         In order for this subset to be defined, a RPL parent subset selection mechanism, which is among the responsibilities of the RPL Objective Function (OF), needs to have specific path information.
         This document focuses on the specification of the transmission of this specific path information.
    </t>
 
    <t>
-		More concretely, this specification focuses on the extensions to the <xref target="RFC6551">DAG Metric Container</xref> required for 
-		providing the PRE mechanism a part of the information it needs to operate.
+		More concretely, this specification focuses on the extensions to the <xref target="RFC6551">DAG Metric Container</xref> required for providing the PRE mechanism a part of the information it needs to operate.
 		This information is the <xref target="RFC6550">RPL</xref> parent address set of a node and it must be sent to potential children of the node. 
-		The RPL DIO Control Message is the canonical way of broadcasting
-		this kind of information and therefore its <xref target="RFC6551">DAG Metric Container</xref> field is used to append a Node State and Attribute (NSA) object.
+		The RPL DIO Control Message is the canonical way of broadcasting this kind of information and therefore its <xref target="RFC6551">DAG Metric Container</xref> field is used to append a Node State and Attribute (NSA) object.
 		The node's parent address set is stored as an optional TLV within the NSA object.
 		This specification defines the type value and structure for the parent address set TLV.
     </t>	
@@ -196,9 +185,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 <section title="Terminology">
 
     <t>
-        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", 
-        "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be 
-        interpreted as described in <xref target="RFC2119"/>.
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.
     </t>
     
     <t>
@@ -213,8 +200,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 <!--                 See <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> for more. -->
 <!--             </t> -->
             <t hangText="Packet Replication and Elimination (PRE):">
-                A method which transmits multiple copies of a packet using multi-path forwarding over a multi-hop network and which consolidates multiple received packet copies
-to control flooding.
+                A method which transmits multiple copies of a packet using multi-path forwarding over a multi-hop network and which consolidates multiple received packet copies to control flooding.
                 See <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref> for more details.
             </t>
             <t hangText="Alternative Parent (AP) Selection:">
@@ -356,15 +342,12 @@ to control flooding.
 <section title="Node State and Attribute (NSA) object type extension">
         <t>
             In order to select their AP node, nodes need to be aware of their grandparent node sets. 
-            Within <xref target="RFC6550">RPL</xref>, the nodes use the DODAG Information Object (DIO) Control Message to broadcast information 
-            about themselves to potential children.
+            Within <xref target="RFC6550">RPL</xref>, the nodes use the DODAG Information Object (DIO) Control Message to broadcast information about themselves to potential children.
             However, <xref target="RFC6550">RPL</xref>, does not define how to propagate parent set related information, which is what this document addresses. 
         </t>
     	<t> 
-        	DIO messages can carry multiple options, out of which the <xref target="RFC6551">DAG Metric Container option</xref> 
-        	is the most suitable structurally and semantically for the purpose of carrying the parent set.
-        	The DAG Metric Container option itself can carry different nested objects, out of which the 
-        	<xref target="RFC6551">Node State and Attribute (NSA)</xref> is appropriate for transferring generic node state data.
+        	DIO messages can carry multiple options, out of which the <xref target="RFC6551">DAG Metric Container option</xref> is the most suitable structurally and semantically for the purpose of carrying the parent set.
+        	The DAG Metric Container option itself can carry different nested objects, out of which the <xref target="RFC6551">Node State and Attribute (NSA)</xref> is appropriate for transferring generic node state data.
         	Within the Node State and Attribute it is possible to store optional TLVs representing various node characteristics.
         	As per the <xref target="RFC6551">Node State and Attribute (NSA)</xref> description, no TLV has been defined for use.
         	This document defines one TLV for the purpose of transmitting a node's parent set.
@@ -397,8 +380,7 @@ to control flooding.
         </figure>
         <t>
             <xref target="fig_dio"/> shows the structure of the DIO Control Message when a DAG Metric Container option is included.
-            The DAG Metric Container option type (DAGMC Type in <xref target="fig_dio"/>) has the value 0x02 as per the 
-            IANA registry for the RPL Control Message Options, and is defined in <xref target="RFC6550"/>.
+            The DAG Metric Container option type (DAGMC Type in <xref target="fig_dio"/>) has the value 0x02 as per the IANA registry for the RPL Control Message Options, and is defined in <xref target="RFC6550"/>.
             The DAG Metric Container option length (DAGMC Length in <xref target="fig_dio"/>) expresses the DAG Metric Container length in bytes.
             DAG Metric Container data holds the actual data and is shown expanded in <xref target="fig_dagmc"/>.
         </t>
@@ -459,8 +441,7 @@ to control flooding.
                 <t hangText="6LoRH-compressed PS IPv6 address(es):">
                     A sequence of zero or more IPv6 addresses belonging to a node's parent set.
                     Each address requires 16 bytes.
-                    The order of the parents in the parent set is in decreasing preference based on 
-                    the <xref target="RFC6550">Objective Function</xref> used by the node. 
+                    The order of the parents in the parent set is in decreasing preference based on the <xref target="RFC6550">Objective Function</xref> used by the node.
                 </t>
             </list>
         </t>
