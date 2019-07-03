@@ -394,7 +394,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |     Res       |  Flags    |A|O|    PS  type   |   PS  Length  | |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ |NSA
-|   6LoRH type  | 6LoRH-compressed PS IPv6 address(es) ...        |
+|   PS IPv6 address(es) ...                                       |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 ]]></artwork>
@@ -412,40 +412,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
                 <t hangText="PS Length:">
                     The total length of the TLV value field (PS IPv6 address(es)) in bytes.
                 </t>
-                <t hangText="6LoRH type:">
-                    The type of 6LoRH compression applied to the PS IPv6 addresses.
-                    For detailed usage see Section 5.1 of <xref target="RFC8138"/>.
-                    
-                    As an overview, the compressed size of each IPv6 address in the "6LoRH-compressed PS IPv6 address(es)" field depending on the value of "6LoRH type" is shown in <xref target="fig_6lorh_type"/>.  
-
-                </t>
-            </list>                
-        </t>
-        <figure title="The SRH-6LoRH Types" anchor="fig_6lorh_type">
-<artwork><![CDATA[
-             +-----------+----------------------+
-             |   6LoRH   | Length of compressed |
-             |   Type    | IPv6 address (bytes) |
-             +-----------+----------------------+
-             |    0      |       1              |
-             |    1      |       2              |
-             |    2      |       4              |
-             |    3      |       8              |
-             |    4      |      16              |
-             +-----------+----------------------+                
-
-]]></artwork>
-        </figure>
-        <t>
-            <list style="hanging" hangIndent="6">    
-                <t hangText="6LoRH-compressed PS IPv6 address(es):">
-                    A sequence of zero or more IPv6 addresses belonging to a node's parent set.
-                    Each address requires 16 bytes.
-                    The order of the parents in the parent set is in decreasing preference based on the <xref target="RFC6550">Objective Function</xref> used by the node.
-                </t>
             </list>
         </t>
-
 
     <section title="Usage">
         <t>
@@ -491,17 +459,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </section>-->
     </section>
         
-    <!-- Talk  about compression options to reduce IPv6 address sizes -->
-    <section title="Compression">
-        <t>
-            The PS IPv6 address(es) field in the Parent Set TLV add overhead due to their size.
-            Therefore, compression is highly desirable in order for this extension to be usable.
-            To meet this goal, a good compression method candidate is <xref target="RFC8138"/> 6LoWPAN Routing Header (6LoRH).
-            Furthermore, the PS IPv6 address(es) belong by definition to nodes in the same RPL DODAG and are stored in the form of a list of addresses.
-            This makes this field a good candidate for the use of the same compression as in Source Routing Header 6LoRH (SRH-6LoRH), achieving efficiency and implementation reuse.
-            Therefore, the PS IPv6 address(es) field SHOULD be compressed using the compression method for Source Routing Header 6LoRH (SRH-6LoRH) <xref target="RFC8138"/>.
-        </t>
-    </section>    
 </section>
 
 <section title="Controlling PRE">
