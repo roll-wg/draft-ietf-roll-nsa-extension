@@ -22,7 +22,7 @@
 <?rfc authorship="yes"?>
 <?rfc tocappendix="yes"?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-03">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-04">
 
 <front> 
 
@@ -140,14 +140,14 @@
         To achieve this they typically leverage 1+1 redundancy, also known as <xref target="I-D.papadopoulos-6tisch-pre-reqs">Packet Replication and Elimination (PRE)</xref>.
         
         Allowing these kinds of applications to function over wireless networks requires the application of the principles of <xref target="I-D.ietf-detnet-architecture">Deterministic Networking</xref>.
-        This results in designs which aim at maximizing packet delivery rate and minimizing latency and jitter.
+        This results in designs which aim at optimizing packet delivery rate and bounding latency.
 
         Additionally, given that the network nodes often do not have an unlimited power supply, energy consumption needs to be minimized as well.
     </t>
 
 
     <t>  
-        As an example, to meet this goal, <xref target="IEEE802154-2015">IEEE Std. 802.15.4</xref> provides Time-Slotted Channel Hopping (TSCH), a mode of operation which uses a common communication schedule
+        As an example, to meet this goal, <xref target="IEEE802154">IEEE Std. 802.15.4</xref> provides Time-Slotted Channel Hopping (TSCH), a mode of operation which uses a common communication schedule
 based on timeslots to allow deterministic medium access as well as channel hopping to work around radio interference.
         However, since TSCH uses retransmissions in the event of a failed transmission, end-to-end delay and jitter performance can deteriorate.
    </t>
@@ -572,10 +572,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
   </references>
   
   <references title="Other Informative References">
-  	<reference anchor="IEEE802154-2015">
+  	<reference anchor="IEEE802154">
     	<front>
         	<title>
-        	   IEEE Std 802.15.4-2015 Standard for Low-Rate Wireless Personal Area Networks (WPANs)
+        	   IEEE Std 802.15.4 Standard for Low-Rate Wireless Personal Area Networks (WPANs)
         	</title>
             <author>
                <organization>IEEE standard for Information Technology</organization>
