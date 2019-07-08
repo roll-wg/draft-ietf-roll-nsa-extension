@@ -26,13 +26,11 @@
 
 <front> 
 
-    <title abbrev="RPL MC NSA object type extension"> 
-    RPL DAG Metric Container Node State and Attribute object type extension
+    <title abbrev="CA OF and PS DAG MC Extension">
+        Common Ancestor Objective Functions and Parent Set DAG Metric Container Extension
     </title>
    
    
-   
-
     <author initials="R.-A." surname="Koutsiamanis" fullname="Remous-Aris Koutsiamanis" role="editor">
       <organization>IMT Atlantique</organization>
       <address>         
@@ -105,6 +103,7 @@
         Implementing Packet Replication and Elimination from / to the RPL root requires the ability to forward copies of packets over different paths via different RPL parents.
         Selecting the appropriate parents to achieve ultra-low latency and jitter requires information about a node's parents.
         This document details what information needs to be transmitted and how it is encoded within a packet to enable this functionality.
+        This document also describes Objective Functions which take advantage of this information to implement multi-path routing.
    </t>
    </abstract>
    
@@ -135,6 +134,7 @@
 
 
 <section title="Introduction">
+
     <t>
         Network-enabled applications in the industrial context must provide stringent guarantees in terms of reliability and predictability.
         To achieve this they typically leverage 1+1 redundancy, also known as <xref target="I-D.papadopoulos-6tisch-pre-reqs">Packet Replication and Elimination (PRE)</xref>.
@@ -166,12 +166,18 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         PRE can follow the Destination-Oriented Directed Acyclic Graph (DODAG) formed by RPL from a node to the root. 
         Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, a subset of which is used to forward packets.
         In order for this subset to be defined, a RPL parent subset selection mechanism, which is among the responsibilities of the RPL Objective Function (OF), needs to have specific path information.
-        This document focuses on the specification of the transmission of this specific path information.
+        This document describes OFs which implement multi-path routing for PRE and specifies the transmission of this specific path information.
    </t>
 
-   <t>
-		More concretely, this specification focuses on the extensions to the <xref target="RFC6551">DAG Metric Container</xref> required for providing the PRE mechanism a part of the information it needs to operate.
-		This information is the <xref target="RFC6550">RPL</xref> parent address set of a node and it must be sent to potential children of the node. 
+    <t>
+        For the OFs, this document specifies a group of OFs called Common Ancestor (CA) OFs.
+        A detailed description is made of how the path information is used within the CA OF and how the subset of parents for forwarding packets is selected.
+        This specification defines new Objective Code Points (OCPs) for these CA OFs.
+    </t>
+    <t>
+
+        For the path information, this specification focuses on the extensions to the <xref target="RFC6551">DAG Metric Container</xref> required for providing the PRE mechanism a part of the information it needs to operate.
+		This information is the <xref target="RFC6550">RPL</xref> parent address set of a node and it must be sent to potential children of the node.
 		The RPL DIO Control Message is the canonical way of broadcasting this kind of information and therefore its <xref target="RFC6551">DAG Metric Container</xref> field is used to append a Node State and Attribute (NSA) object.
 		The node's parent address set is stored as an optional TLV within the NSA object.
 		This specification defines the type value and structure for the parent address set TLV.
@@ -208,32 +214,118 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             </t>
         </list>
     </t>
+
 </section>
 
-<section title="Alternative Parent Selection">
+<section title="Common Ancestor Objective Functions">
+
     <t>
 		In the RPL protocol, each node maintains a list of potential parents. 
 		For PRE, the Preferred Parent (PP) node is defined to be the same as the RPL DODAG Preferred Parent node. 
 		Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network registers an AP node as well from its Parent Set (PS).
+    </t>
+
+    <t>
 		There are multiple alternative methods of selecting the AP node. This functionality is included in the operation of the RPL Objective Function (OF).
-		A scheme which allows the two paths to remain correlated is detailed here.
-		More specifically, in this scheme a node will select an AP node close to its PP node to allow the operation of overhearing between parents. 
+		A group of OFs which allow the two paths to remain correlated is detailed here.
+		More specifically, when using these OFs a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
         For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>.
 		If multiple potential APs match this condition, the AP with the lowest rank will be registered.
     </t>
-    
+
     <t>
-        There are at least three methods of performing the AP selection based on common ancestors (CA), named Common Ancestor Strict, Common Ancestor Medium, and Common Ancestor Relaxed, depending on how restrictive the selection process is.
+        The OFs described here are an extension of the <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref> (MRHOF) OF.
+        In general, these OFs extend MRHOF by specifying how an AP is selected.
+        The selection of the PP is kept the same as in MRHOF.
+    </t>
+
+    <t>
+        The ways in which the CA OFs modify MRHOF in a section-by-section manner follows:
+        <list style="hanging">
+            <t hangText="3.  The Minimum Rank with Hysteresis Objective Function:">
+                Same as MRHOF extended to AP selection.
+                Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors, depending on the specific variant of CA OF used.
+            </t>
+            <t hangText="3.1.  Computing the Path Cost:">
+                Same as MRHOF extended to AP selection.
+                If a candidate neighbor does not fulfill the CA requirement then the path through that neighbor SHOULD be set to MAX_PATH_COST.
+                As a result, the node MUST NOT select the candidate neighbor as its AP.
+            </t>
+            <t hangText="3.2.  Parent Selection:">
+                Same as MRHOF extended to AP selection.
+                To allow hysteresis, AP selection maintains a variable, cur_ap_min_path_cost, which is the path cost of the current AP.
+            </t>
+            <t hangText="3.2.1.  When Parent Selection Runs:">
+                Same as MRHOF.
+            </t>
+            <t hangText="3.2.2.  Parent Selection Algorithm:">
+                Same as MRHOF extended to AP selection.
+                If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD, the node MAY continue to use the current AP.
+                Additionally, if there is no PP selected, there MUST NOT be any AP selected as well.
+                Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its alternative parent set.
+            </t>
+            <t hangText="3.3.  Computing Rank:">
+                Same as MRHOF.
+            </t>
+            <t hangText="3.4.  Advertising the Path Cost:">
+                Same as MRHOF.
+            </t>
+            <t hangText="3.5.  Working without Metric Containers:">
+                It is not possible to work without metric containers, since CA AP selection requires information from parents regarding their parent sets, which is transmitted via the NSA object in the DIO Mectric Container.
+            </t>
+            <t hangText="4.  Using MRHOF for Metric Maximization:">
+                Same as MRHOF.
+            </t>
+            <t hangText="5.  MRHOF Variables and Parameters:">
+                Same as MRHOF extended to AP selection.
+                The CA OFs operate like MRHOF for AP selection by maintaining separate:
+                <list style="hanging">
+                    <t hangText="AP:">
+                        Corresponding to the MRHOF PP.
+                        Hysteresis is configured for AP with the same PARENT_SWITCH_THRESHOLD parameter as in MRHOF.
+                        The AP MUST NOT be the same as the PP.
+                    </t>
+                    <t hangText="Alternative parent set:">
+                        Corresponding to the MRHOF parent set.
+                        The size is defined by the same PARENT_SET_SIZE parameter as in MRHOF.
+                        The Alternative parent set MUST be a non-strict subset of the parent set.
+                    </t>
+                    <t hangText="cur_ap_min_path_cost:">
+                        Corresponding to the MRHOF cur_min_path_cost variable.
+                        To support the operation of the hysteresis function for AP selection.
+                    </t>
+                </list>
+            </t>
+            <t hangText="6.  Manageability:">
+                Same as MRHOF.
+            </t>
+            <t hangText="6.1.  Device Configuration:">
+                Same as MRHOF.
+            </t>
+            <t hangText="6.2.  Device Monitoring:">
+                Same as MRHOF.
+            </t>
+        </list>
+
+    </t>
+
+    <t>
+        Three OFs are defined which perform AP selection based on common ancestors, named Common Ancestor Strict, Common Ancestor Medium, and Common Ancestor Relaxed, depending on how restrictive the selection process is.
         A more restrictive method will limit flooding but might fail to select an appropriate AP, while a less restrictive one will more often find an appropriate AP but might increase flooding.
+    </t>
+
+    <t>
+        All three OFs apply their corresponding common ancestor criterion to filter the list of candidate neighbours in the alternative parent set.
+        The AP is then selected from the alternative parent set based on Rank and using hysteresis as is done for the PP in MRHOF.
     </t>
     
     <section title="Common Ancestor Strict" anchor="sec_ca_strict">
+
         <t>
-            In CA Strict, the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is the same as the PP of the potential AP. 
+            In the CA Strict OF, represented with Objective Code Point (OCP) TBD1, the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is the same as the PP of the potential AP.
         </t>
-        
-        
-            <figure title="Example Common Ancestor Strict Alternative Parent Selection method" anchor="fig_ca_alternative_parent_selection">
+
+        <figure title="Example Common Ancestor Strict Alternative Parent Selection method" anchor="fig_ca_alternative_parent_selection">
 <artwork><![CDATA[
 
                (  R  ) root              
@@ -256,8 +348,9 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
              \----\\  || /               || Preferred Parent
                   (   S   ) source       |  Potential Alternative Parent
 ]]></artwork>                                   
-            </figure>
-        <t> 
+        </figure>
+
+        <t>
             For example, in <xref target="fig_ca_alternative_parent_selection"/>, the source node S must know its grandparent sets through nodes A, B, C, and D.
             The Parent Sets (PS) and the Preferred Parents (PS) of nodes A, B, C, and D are shown on the side of the figure.
             The CA Strict parent selection method will select an AP for node S for which PP(PP(S)) = PP(AP).
@@ -276,11 +369,13 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             
             node S can decide to use node B as its AP node, since PP(PP(S)) = Y = PP(B).
         </t>    
+
     </section>
     
     <section title="Common Ancestor Medium" anchor="sec_ca_medium">
+
         <t>
-            In CA Medium, the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is contained in the PS of the potential AP. 
+            In the CA Medium OF, represented with Objective Code Point (OCP) TBD2, the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is contained in the PS of the potential AP.
         </t>
         
         <t> 
@@ -301,11 +396,13 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             
             node S can decide to use node B or D as its AP node.
         </t>    
-    </section>    
+
+    </section>
         
     <section title="Common Ancestor Relaxed" anchor="sec_ca_relaxed">
+
         <t>
-            In CA Relaxed, the node will check if the Parent Set (PS) of its Preferred Parent (PP) has a node in common with the PS of the potential AP. 
+            In the CA Relaxed OF, represented with Objective Code Point (OCP) TBD3, the node will check if the Parent Set (PS) of its Preferred Parent (PP) has a node in common with the PS of the potential AP.
         </t>
         
         <t> 
@@ -325,33 +422,38 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             
             node S can decide to use node A, B or D as its AP node.
         </t>    
+
     </section>
     
     <section title="Usage">
+
         <t>
             The PS information can be used by any of the described AP selection methods or other ones not described here, depending on requirements.
-            This document does not suggest a specific AP selection method. 
-            Additionally, it is optional for all nodes to use the same AP selection method.
+            It is optional for all nodes to use the same AP selection method.
             Different nodes may use different AP selection methods, since the selection method is local to each node.
             For example, using different methods can be used to vary the transmission reliability in each hop. 
         </t>
-    </section>    
+
+    </section>
 
 </section>
 
 <section title="Node State and Attribute (NSA) object type extension">
+
         <t>
             In order to select their AP node, nodes need to be aware of their grandparent node sets. 
             Within <xref target="RFC6550">RPL</xref>, the nodes use the DODAG Information Object (DIO) Control Message to broadcast information about themselves to potential children.
             However, <xref target="RFC6550">RPL</xref>, does not define how to propagate parent set related information, which is what this document addresses. 
         </t>
-    	<t> 
+
+    	<t>
         	DIO messages can carry multiple options, out of which the <xref target="RFC6551">DAG Metric Container option</xref> is the most suitable structurally and semantically for the purpose of carrying the parent set.
         	The DAG Metric Container option itself can carry different nested objects, out of which the <xref target="RFC6551">Node State and Attribute (NSA)</xref> is appropriate for transferring generic node state data.
         	Within the Node State and Attribute it is possible to store optional TLVs representing various node characteristics.
         	As per the <xref target="RFC6551">Node State and Attribute (NSA)</xref> description, no TLV has been defined for use.
         	This document defines one TLV for the purpose of transmitting a node's parent set.
     	</t>
+
         <figure title="Example DIO Message with a DAG Metric Container option" anchor="fig_dio">
 <artwork><![CDATA[
  0                   1                   2                   3
@@ -378,6 +480,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
 ]]></artwork>
         </figure>
+
         <t>
             <xref target="fig_dio"/> shows the structure of the DIO Control Message when a DAG Metric Container option is included.
             The DAG Metric Container option type (DAGMC Type in <xref target="fig_dio"/>) has the value 0x02 as per the IANA registry for the RPL Control Message Options, and is defined in <xref target="RFC6550"/>.
@@ -399,6 +502,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
 ]]></artwork>
         </figure>
+
         <t>
             The structure of the DAG Metric Container data in the form of a Node State and Attribute (NSA) object with a TLV in the NSA Optional TLVs field is shown in <xref target="fig_dagmc"/>.
             The first 32 bits comprise the DAG Metric Container header and all the following bits are part of the Node State and Attribute object body, as defined in <xref target="RFC6551"/>.
@@ -407,7 +511,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             <list style="hanging" hangIndent="6">
                 <t hangText="PS type:">
                     The type of the Parent Set TLV.
-                    The value is TBD1.
+                    The value is TBD4.
                 </t>
                 <t hangText="PS Length:">
                     The total length of the TLV value field (PS IPv6 address(es)) in bytes.
@@ -416,6 +520,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </t>
 
     <section title="Usage">
+
         <t>
             The PS SHOULD be used in the process of parent selection, and especially in AP selection, since it can help the alternative path to not significantly deviate from the preferred path.
             The Parent Set is information local to the node that broadcasts it.
@@ -467,7 +572,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         PRE is very helpful when the aim is to increase reliability for a certain path, however its use creates additional traffic as part of the replication process.
         It is conceivable that not all paths have stringent reliability requirements. 
         Therefore, a way to control whether PRE is applied to a path's packets SHOULD be implemented.
-        For example, a traffic class label can be used to determine this behaviour per flow type as described in <xref target="I-D.ietf-detnet-architecture">Deterministic Networking Architecture</xref>.   
+        For example, a traffic class label can be used to determine this behavior per flow type as described in <xref target="I-D.ietf-detnet-architecture">Deterministic Networking Architecture</xref>.
     </t>
 
     
@@ -480,16 +585,17 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         Therefore, the security mechanisms defined in <xref target="RFC6550">RPL</xref> apply to this proposed extension.
     </t>
 
-    
 </section>
 
 
 
 <section title="IANA Considerations">
+
     <t>
-        This proposal requests the allocation of a new value TBD1 for the "Parent Set" TLV in the Routing Metric/Constraint TLVs sub-registry from IANA.
+        This proposal requests the allocation of new values TBD1, TBD2, TBD3 from the "Objective Code Point (OCP)" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry.
+        This proposal also requests the allocation of a new value TBD4 for the "Parent Set" TLV from the Routing Metric/Constraint TLVs sub-registry from IANA.
     </t>
-            
+
 </section>
 
 
@@ -518,7 +624,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <?rfc include='reference.RFC.2119'?>
         <?rfc include="reference.RFC.6550"?> 						<!-- RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks -->
         <?rfc include="reference.RFC.6551"?> 						<!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
-        <?rfc include="reference.RFC.8138"?>                        <!-- IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing Header -->        
+        <?rfc include="reference.RFC.6719"?>                        <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
+        <!-- <?rfc include="reference.RFC.8138"?> -->               <!-- IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing Header -->
         <!-- <?rfc include="reference.RFC.8180"?> -->			    <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
 		<?rfc include='reference.I-D.ietf-6tisch-architecture'?>	<!-- 6TiSCH: 6TiSCH architecture -->
 		<!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> --> <!-- 6TiSCH: 6top protocol -->
