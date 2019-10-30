@@ -22,7 +22,7 @@
 <?rfc authorship="yes"?>
 <?rfc tocappendix="yes"?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-04">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-05">
 
 <front> 
 
@@ -172,7 +172,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <t>
         For the OFs, this document specifies a group of OFs called Common Ancestor (CA) OFs.
         A detailed description is made of how the path information is used within the CA OF and how the subset of parents for forwarding packets is selected.
-        This specification defines new Objective Code Points (OCPs) for these CA OFs.
+        This specification defines a new shared Objective Code Point (OCP) for these CA OFs.
     </t>
     <t>
 
@@ -312,6 +312,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <t>
         Three OFs are defined which perform AP selection based on common ancestors, named Common Ancestor Strict, Common Ancestor Medium, and Common Ancestor Relaxed, depending on how restrictive the selection process is.
         A more restrictive method will limit flooding but might fail to select an appropriate AP, while a less restrictive one will more often find an appropriate AP but might increase flooding.
+        The OFs are all represented with the same Objective Code Point (OCP): TBD1.
     </t>
 
     <t>
@@ -322,7 +323,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <section title="Common Ancestor Strict" anchor="sec_ca_strict">
 
         <t>
-            In the CA Strict OF, represented with Objective Code Point (OCP) TBD1, the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is the same as the PP of the potential AP.
+            In the CA Strict OF the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is the same as the PP of the potential AP.
         </t>
 
         <figure title="Example Common Ancestor Strict Alternative Parent Selection method" anchor="fig_ca_alternative_parent_selection">
@@ -375,7 +376,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <section title="Common Ancestor Medium" anchor="sec_ca_medium">
 
         <t>
-            In the CA Medium OF, represented with Objective Code Point (OCP) TBD2, the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is contained in the PS of the potential AP.
+            In the CA Medium OF the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is contained in the PS of the potential AP.
         </t>
         
         <t> 
@@ -402,7 +403,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <section title="Common Ancestor Relaxed" anchor="sec_ca_relaxed">
 
         <t>
-            In the CA Relaxed OF, represented with Objective Code Point (OCP) TBD3, the node will check if the Parent Set (PS) of its Preferred Parent (PP) has a node in common with the PS of the potential AP.
+            In the CA Relaxed OF the node will check if the Parent Set (PS) of its Preferred Parent (PP) has a node in common with the PS of the potential AP.
         </t>
         
         <t> 
@@ -511,7 +512,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             <list style="hanging" hangIndent="6">
                 <t hangText="PS type:">
                     The type of the Parent Set TLV.
-                    The value is TBD4.
+                    The value is TBD2.
                 </t>
                 <t hangText="PS Length:">
                     The total length of the TLV value field (PS IPv6 address(es)) in bytes.
@@ -592,8 +593,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 <section title="IANA Considerations">
 
     <t>
-        This proposal requests the allocation of new values TBD1, TBD2, TBD3 from the "Objective Code Point (OCP)" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry.
-        This proposal also requests the allocation of a new value TBD4 for the "Parent Set" TLV from the Routing Metric/Constraint TLVs sub-registry from IANA.
+        This proposal requests the allocation of a new value TBD1 from the "Objective Code Point (OCP)" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry.
+        This proposal also requests the allocation of a new value TBD2 for the "Parent Set" TLV from the Routing Metric/Constraint TLVs sub-registry from IANA.
     </t>
 
 </section>
