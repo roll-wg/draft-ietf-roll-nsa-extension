@@ -236,11 +236,11 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <t>
         The OFs described here are an extension of the <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref> (MRHOF) OF.
         In general, these OFs extend MRHOF by specifying how an AP is selected.
-        The selection of the PP is kept the same as in MRHOF.
+        Importantly, the calculation of the rank of the node though each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
     </t>
 
     <t>
-        The ways in which the CA OFs modify MRHOF in a section-by-section manner follows:
+        The ways in which the CA OFs modify MRHOF in a section-by-section manner follows in detail:
         <list style="hanging">
             <t hangText="3.  The Minimum Rank with Hysteresis Objective Function:">
                 Same as MRHOF extended to AP selection.
@@ -430,7 +430,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
         <t>
             The PS information can be used by any of the described AP selection methods or other ones not described here, depending on requirements.
-            It is optional for all nodes to use the same AP selection method.
+            It is optional for all nodes to use the same AP selection method, and because the CA OFs share the same OCP, they can do that withing the same RPL Instance.
             Different nodes may use different AP selection methods, since the selection method is local to each node.
             For example, using different methods can be used to vary the transmission reliability in each hop. 
         </t>
@@ -529,6 +529,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         
         <t>
             The PS is used only within NSA objects configured as constraints and is used as per <xref target="RFC6551"/>.
+            As a result, the PS does not affect the calculation of the rank through candidate neighbors.
+            It is only used with the CA OFs to remove nodes which do not fulfill the CA OF criteria from the candidate neighbor list.
         </t>
             
         <!--<section title="DAG Metric Container fields">
