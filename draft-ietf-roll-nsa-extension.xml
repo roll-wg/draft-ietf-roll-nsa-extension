@@ -27,7 +27,7 @@
 <front> 
 
     <title abbrev="CA OF and PS DAG MC Extension">
-        Common Ancestor Objective Functions and Parent Set DAG Metric Container Extension
+        Common Ancestor Objective Function and Parent Set DAG Metric Container Extension
     </title>
    
    
@@ -178,7 +178,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         For the OFs, this document specifies a group of OFs called Common Ancestor (CA) OFs.
         -->
         A detailed description is given of how the path information is used within the CA OF and how the subset of parents for forwarding packets is selected.
-        This specification defines a new shared Objective Code Point (OCP) for these CA OFs.
+        This specification defines a new shared Objective Code Point (OCP) for the CA OF.
     </t>
     <t>
 
@@ -223,7 +223,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
 </section>
 
-<section title="Common Ancestor Objective Functions">
+<section title="Common Ancestor Objective Function">
 
     <t>
 		In the RPL protocol, each node maintains a list of potential parents. 
