@@ -526,6 +526,14 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
                 </t>
                 <t hangText="PS Length:">
                     The total length of the TLV value field (PS IPv6 address(es)) in bytes.
+                    The length is an integral multiple of 16, the number of bytes in an IPv6 address.
+                </t>
+                <t hangText="PS IPv6 address(es)">
+                    One or more 128-bit IPv6 address(es) without any separator between them.
+                    The field consists of one IPv6 address per parent in the parent set.
+                    The parent addresses are listed in decreasing order of preference and not all parents in the parent set need to be included.
+                    The selection of how many parents from the parent set are to be included is left to the implementation.  
+                    The number of p, wearent addresses in the PS IPv6 address(es) field can be deduced by dividing the length of the PS IPv6 address(es) field in bytes by 16, the number of bytes in an IPv6 address.
                 </t>
             </list>
         </t>
