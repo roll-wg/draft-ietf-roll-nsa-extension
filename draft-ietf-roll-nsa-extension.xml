@@ -27,7 +27,7 @@
 <front> 
 
     <title abbrev="CA OF and PS DAG MC Extension">
-        Common Ancestor Objective Functions and Parent Set DAG Metric Container Extension
+        Common Ancestor Objective Function and Parent Set DAG Metric Container Extension
     </title>
    
    
@@ -100,10 +100,10 @@
 
    <abstract>
    <t>
-        Implementing Packet Replication and Elimination from / to the RPL root requires the ability to forward copies of packets over different paths via different RPL parents.
+        Implementing Packet Replication and Elimination from/to the RPL root requires the ability to forward copies of packets over different paths via different RPL parents.
         Selecting the appropriate parents to achieve ultra-low latency and jitter requires information about a node's parents.
-        This document details what information needs to be transmitted and how it is encoded within a packet to enable this functionality.
-        This document also describes Objective Functions which take advantage of this information to implement multi-path routing.
+        This document details what information needs to be transmitted and how it is encoded within RPL control packets to enable this functionality.
+        This document also describes Objective Function which take advantage of this information to implement multi-path routing.
    </t>
    </abstract>
    
@@ -137,7 +137,10 @@
 
     <t>
         Network-enabled applications in the industrial context must provide stringent guarantees in terms of reliability and predictability.
+        <xref target="I-D.papadopoulos-6tisch-pre-reqs">Packet Replication and Elimination (PRE)</xref> is a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
+        <!--
         To achieve this they typically leverage 1+1 redundancy, also known as <xref target="I-D.papadopoulos-6tisch-pre-reqs">Packet Replication and Elimination (PRE)</xref>.
+        -->
         
         Allowing these kinds of applications to function over wireless networks requires the application of the principles of <xref target="I-D.ietf-detnet-architecture">Deterministic Networking</xref>.
         This results in designs which aim at optimizing packet delivery rate and bounding latency.
@@ -170,9 +173,12 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
    </t>
 
     <t>
+        This document describes a new objective function (OF) called as Common Ancestor (CA) OF.
+        <!-- RJ: There are no group of OFs
         For the OFs, this document specifies a group of OFs called Common Ancestor (CA) OFs.
-        A detailed description is made of how the path information is used within the CA OF and how the subset of parents for forwarding packets is selected.
-        This specification defines a new shared Objective Code Point (OCP) for these CA OFs.
+        -->
+        A detailed description is given of how the path information is used within the CA OF and how the subset of parents for forwarding packets is selected.
+        This specification defines a new shared Objective Code Point (OCP) for the CA OF.
     </t>
     <t>
 
@@ -217,7 +223,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
 </section>
 
-<section title="Common Ancestor Objective Functions">
+<section title="Common Ancestor Objective Function">
 
     <t>
 		In the RPL protocol, each node maintains a list of potential parents. 
@@ -227,24 +233,27 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
     <t>
 		There are multiple alternative methods of selecting the AP node. This functionality is included in the operation of the RPL Objective Function (OF).
-		A group of OFs which allow the two paths to remain correlated is detailed here.
-		More specifically, when using these OFs a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
+		An OF which allows the two paths to remain correlated is detailed here.
+		More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
         For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>.
 		If multiple potential APs match this condition, the AP with the lowest rank will be registered.
     </t>
 
     <t>
-        The OFs described here are an extension of the <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref> (MRHOF) OF.
-        In general, these OFs extend MRHOF by specifying how an AP is selected.
-        Importantly, the calculation of the rank of the node though each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
+        The OF described here is an extension of the <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref> (MRHOF).
+        In general, this OF extends MRHOF by specifying how an AP is selected.
+        Importantly, the calculation of the rank of the node through each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
     </t>
 
     <t>
-        The ways in which the CA OFs modify MRHOF in a section-by-section manner follows in detail:
+        The ways in which the CA OF modifies MRHOF in a section-by-section manner follows in detail:
         <list style="hanging">
             <t hangText="3.  The Minimum Rank with Hysteresis Objective Function:">
                 Same as MRHOF extended to AP selection.
-                Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors, depending on the specific variant of CA OF used.
+                Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors.
+                <!-- [RJ] There is just one CAOF
+                     , depending on the specific variant of CA OF used.
+                 -->
             </t>
             <t hangText="3.1.  Computing the Path Cost:">
                 Same as MRHOF extended to AP selection.
@@ -430,7 +439,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
         <t>
             The PS information can be used by any of the described AP selection methods or other ones not described here, depending on requirements.
-            It is optional for all nodes to use the same AP selection method, and because the CA OFs share the same OCP, they can do that withing the same RPL Instance.
+            It is optional for all nodes to use the same AP selection method.
+            <!-- [RJ] there are no multiple OFs
+                 , and because the CA OFs share the same OCP, they can do that withing the same RPL Instance.
+                 -->
             Different nodes may use different AP selection methods, since the selection method is local to each node.
             For example, using different methods can be used to vary the transmission reliability in each hop. 
         </t>
