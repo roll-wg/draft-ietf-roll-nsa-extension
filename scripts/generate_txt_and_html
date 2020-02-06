@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+DRAFT_FILE="draft-ietf-roll-nsa-extension.xml"
+
 XML2RFC_BIN=$( which xml2rfc )
 if [ -z "${XML2RFC_BIN}" ]
 then
@@ -14,6 +16,6 @@ then
     exit 1
 fi
 
-DRAFT_BASENAME=$( grep -oE 'docName="[^"]*"' < draft-ietf-roll-nsa-extension.xml | grep -oE 'draft-[^"]+' )
+DRAFT_BASENAME=$( grep -oE 'docName="[^"]*"' < "${DRAFT_FILE}" | grep -oE 'draft-[^"]+' )
 echo "Found ${DRAFT_BASENAME}"
-xml2rfc --text --html --basename="${DRAFT_BASENAME}" draft-ietf-roll-nsa-extension.xml
+xml2rfc --text --html --basename="${DRAFT_BASENAME}" "${DRAFT_FILE}"

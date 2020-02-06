@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+DRAFT_FILE="draft-ietf-roll-nsa-extension.xml"
+
+PYTHON_BIN=$( which python )
+if [ -z "${PYTHON_BIN}" ]
+then
+    echo "Could not find python in the PATH. Exiting."
+    exit 1
+fi
+
+READLINK_BIN=$( which readlink )
+if [ -z "${PYTHON_BIN}" ]
+then
+    echo "Could not find readlink in the PATH. Exiting."
+    exit 1
+fi
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+SCRIPT=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+#For debugging input and xpath:
+# print('Input 40 first is:') ; print('\n'.join(inp.split('\n')[:40]))
+# print(root)
+# print(title)
+DRAFT_TITLE=$( python -c "import xml.etree.ElementTree as ET; from sys import stdin; inp = stdin.read();  root = ET.fromstring(inp); title = root.find('./front/title'); clean_title = ' '.join([part.strip() for part in title.text.strip().split() if part.strip() != '']) ; print(clean_title)" < "${DRAFT_FILE}" )
+
+echo "Found draft title: $DRAFT_TITLE"
+
+while true
+do 
+    "${SCRIPTPATH}/sleep_until_modified" "$DRAFT_FILE"
+    "${SCRIPTPATH}/generate_txt_and_html"
+    "${SCRIPTPATH}/refresh_browser" "$DRAFT_TITLE"
+done
