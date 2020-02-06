@@ -209,8 +209,17 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
                 A method which transmits multiple copies of a packet using multi-path forwarding over a multi-hop network and which consolidates multiple received packet copies to control flooding.
                 See <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref> for more details.
             </t>
+            <t hangText="Parent Set (PS):">
+                Given a RPL node, the set of its neighbor nodes which participate in the same RPL DODAG and which can potentially take the role of the node's preferred parent.
+            </t>
+            <t hangText="Alternative Parent (AP):">
+                A RPL parent in the parent set of a node which is used to forward a packet copy when replicating packets.
+            </t>
             <t hangText="Alternative Parent (AP) Selection:">
                 The mechanism for choosing the next hop node to forward a packet copy when replicating packets.
+            </t>
+            <t hangText="Preferred Grand Parent (PGP):">
+                The preferred parent of the preferred parent of a node.
             </t>
         </list>
     </t>
