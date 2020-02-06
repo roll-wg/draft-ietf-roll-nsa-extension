@@ -138,9 +138,6 @@
     <t>
         Network-enabled applications in the industrial context must provide stringent guarantees in terms of reliability and predictability.
         <xref target="I-D.papadopoulos-6tisch-pre-reqs">Packet Replication and Elimination (PRE)</xref> is a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
-        <!--
-        To achieve this they typically leverage 1+1 redundancy, also known as <xref target="I-D.papadopoulos-6tisch-pre-reqs">Packet Replication and Elimination (PRE)</xref>.
-        -->
         
         Allowing these kinds of applications to function over wireless networks requires the application of the principles of <xref target="I-D.ietf-detnet-architecture">Deterministic Networking</xref>.
         This results in designs which aim at optimizing packet delivery rate and bounding latency.
@@ -173,12 +170,9 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
    </t>
 
     <t>
-        This document describes a new objective function (OF) called as Common Ancestor (CA) OF.
-        <!-- RJ: There are no group of OFs
-        For the OFs, this document specifies a group of OFs called Common Ancestor (CA) OFs.
-        -->
+        This document describes a new objective function (OF) called the Common Ancestor (CA) OF.
         A detailed description is given of how the path information is used within the CA OF and how the subset of parents for forwarding packets is selected.
-        This specification defines a new shared Objective Code Point (OCP) for the CA OF.
+        This specification defines a new Objective Code Point (OCP) for the CA OF.
     </t>
     <t>
 
@@ -251,9 +245,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             <t hangText="3.  The Minimum Rank with Hysteresis Objective Function:">
                 Same as MRHOF extended to AP selection.
                 Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors.
-                <!-- [RJ] There is just one CAOF
-                     , depending on the specific variant of CA OF used.
-                 -->
             </t>
             <t hangText="3.1.  Computing the Path Cost:">
                 Same as MRHOF extended to AP selection.
@@ -440,9 +431,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <t>
             The PS information can be used by any of the described AP selection methods or other ones not described here, depending on requirements.
             It is optional for all nodes to use the same AP selection method.
-            <!-- [RJ] there are no multiple OFs
-                 , and because the CA OFs share the same OCP, they can do that withing the same RPL Instance.
-                 -->
             Different nodes may use different AP selection methods, since the selection method is local to each node.
             For example, using different methods can be used to vary the transmission reliability in each hop. 
         </t>
@@ -542,7 +530,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <t>
             The PS is used only within NSA objects configured as constraints and is used as per <xref target="RFC6551"/>.
             As a result, the PS does not affect the calculation of the rank through candidate neighbors.
-            It is only used with the CA OFs to remove nodes which do not fulfill the CA OF criteria from the candidate neighbor list.
+            It is only used with the CA OF to remove nodes which do not fulfill the CA OF criteria from the candidate neighbor list.
         </t>
             
         <!--<section title="DAG Metric Container fields">
