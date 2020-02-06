@@ -257,7 +257,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             </t>
             <t hangText="3.1.  Computing the Path Cost:">
                 Same as MRHOF extended to AP selection.
-                If a candidate neighbor does not fulfill the CA requirement then the path through that neighbor SHOULD be set to MAX_PATH_COST.
+                If a candidate neighbor does not fulfill the CA requirement then the path through that neighbor SHOULD be set to MAX_PATH_COST, the same value used by MRHOF.
                 As a result, the node MUST NOT select the candidate neighbor as its AP.
             </t>
             <t hangText="3.2.  Parent Selection:">
@@ -269,9 +269,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             </t>
             <t hangText="3.2.2.  Parent Selection Algorithm:">
                 Same as MRHOF extended to AP selection.
-                If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD, the node MAY continue to use the current AP.
+                If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD (the same variable as MRHOF uses), the node MAY continue to use the current AP.
                 Additionally, if there is no PP selected, there MUST NOT be any AP selected as well.
                 Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its alternative parent set.
+                The value of PARENT_SET_SIZE is the same as in MRHOF.
             </t>
             <t hangText="3.3.  Computing Rank:">
                 Same as MRHOF.
