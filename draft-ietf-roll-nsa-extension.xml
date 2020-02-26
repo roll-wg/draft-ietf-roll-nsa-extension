@@ -103,7 +103,7 @@
         Implementing Packet Replication and Elimination from/to the RPL root requires the ability to forward copies of packets over different paths via different RPL parents.
         Selecting the appropriate parents to achieve ultra-low latency and jitter requires information about a node's parents.
         This document details what information needs to be transmitted and how it is encoded within RPL control packets to enable this functionality.
-        This document also describes an Objective Function which take advantage of this information to implement multi-path routing.
+        This document also describes an Objective Function which takes advantage of this information to implement multi-path routing.
    </t>
    </abstract>
    
