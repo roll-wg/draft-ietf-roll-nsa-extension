@@ -103,7 +103,7 @@
         Implementing Packet Replication and Elimination from/to the RPL root requires the ability to forward copies of packets over different paths via different RPL parents.
         Selecting the appropriate parents to achieve ultra-low latency and jitter requires information about a node's parents.
         This document details what information needs to be transmitted and how it is encoded within RPL control packets to enable this functionality.
-        This document also describes Objective Function which take advantage of this information to implement multi-path routing.
+        This document also describes an Objective Function which take advantage of this information to implement multi-path routing.
    </t>
    </abstract>
    
@@ -142,7 +142,7 @@
         Allowing these kinds of applications to function over wireless networks requires the application of the principles of <xref target="I-D.ietf-detnet-architecture">Deterministic Networking</xref>.
         This results in designs which aim at optimizing packet delivery rate and bounding latency.
 
-        Additionally, given that the network nodes often do not have an unlimited power supply, energy consumption needs to be minimized as well.
+        Additionally, given that the network nodes often have a limited energy supply, energy consumption needs to be minimized as well.
     </t>
 
 
@@ -251,42 +251,42 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <t>
         The ways in which the CA OF modifies MRHOF in a section-by-section manner follows in detail:
         <list style="hanging">
-            <t hangText="3.  The Minimum Rank with Hysteresis Objective Function:">
+            <t hangText="MRHOF-3.  The Minimum Rank with Hysteresis Objective Function:">
                 Same as MRHOF extended to AP selection.
                 Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors.
             </t>
-            <t hangText="3.1.  Computing the Path Cost:">
+            <t hangText="MRHOF-3.1.  Computing the Path Cost:">
                 Same as MRHOF extended to AP selection.
                 If a candidate neighbor does not fulfill the CA requirement then the path through that neighbor SHOULD be set to MAX_PATH_COST, the same value used by MRHOF.
                 As a result, the node MUST NOT select the candidate neighbor as its AP.
             </t>
-            <t hangText="3.2.  Parent Selection:">
+            <t hangText="MRHOF-3.2.  Parent Selection:">
                 Same as MRHOF extended to AP selection.
                 To allow hysteresis, AP selection maintains a variable, cur_ap_min_path_cost, which is the path cost of the current AP.
             </t>
-            <t hangText="3.2.1.  When Parent Selection Runs:">
+            <t hangText="MRHOF-3.2.1.  When Parent Selection Runs:">
                 Same as MRHOF.
             </t>
-            <t hangText="3.2.2.  Parent Selection Algorithm:">
+            <t hangText="MRHOF-3.2.2.  Parent Selection Algorithm:">
                 Same as MRHOF extended to AP selection.
                 If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD (the same variable as MRHOF uses), the node MAY continue to use the current AP.
                 Additionally, if there is no PP selected, there MUST NOT be any AP selected as well.
                 Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its alternative parent set.
                 The value of PARENT_SET_SIZE is the same as in MRHOF.
             </t>
-            <t hangText="3.3.  Computing Rank:">
+            <t hangText="MRHOF-3.3.  Computing Rank:">
                 Same as MRHOF.
             </t>
-            <t hangText="3.4.  Advertising the Path Cost:">
+            <t hangText="MRHOF-3.4.  Advertising the Path Cost:">
                 Same as MRHOF.
             </t>
-            <t hangText="3.5.  Working without Metric Containers:">
+            <t hangText="MRHOF-3.5.  Working without Metric Containers:">
                 It is not possible to work without metric containers, since CA AP selection requires information from parents regarding their parent sets, which is transmitted via the NSA object in the DIO Mectric Container.
             </t>
-            <t hangText="4.  Using MRHOF for Metric Maximization:">
+            <t hangText="MRHOF-4.  Using MRHOF for Metric Maximization:">
                 Same as MRHOF.
             </t>
-            <t hangText="5.  MRHOF Variables and Parameters:">
+            <t hangText="MRHOF-5.  MRHOF Variables and Parameters:">
                 Same as MRHOF extended to AP selection.
                 The CA OFs operate like MRHOF for AP selection by maintaining separate:
                 <list style="hanging">
@@ -306,13 +306,13 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
                     </t>
                 </list>
             </t>
-            <t hangText="6.  Manageability:">
+            <t hangText="MRHOF-6.  Manageability:">
                 Same as MRHOF.
             </t>
-            <t hangText="6.1.  Device Configuration:">
+            <t hangText="MRHOF-6.1.  Device Configuration:">
                 Same as MRHOF.
             </t>
-            <t hangText="6.2.  Device Monitoring:">
+            <t hangText="MRHOF-6.2.  Device Monitoring:">
                 Same as MRHOF.
             </t>
         </list>
@@ -517,7 +517,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <t>
             The structure of the DAG Metric Container data in the form of a Node State and Attribute (NSA) object with a TLV in the NSA Optional TLVs field is shown in <xref target="fig_dagmc"/>.
             The first 32 bits comprise the DAG Metric Container header and all the following bits are part of the Node State and Attribute object body, as defined in <xref target="RFC6551"/>.
-            This document defines a new TLV, which CAN be carried in the Node State and Attribute (NSA) object Optional TLVs field. 
+            This document defines a new TLV, which MAY be carried in the Node State and Attribute (NSA) object Optional TLVs field. 
             The TLV is named Parent Set and is abbreviated as PS in <xref target="fig_dagmc"/>.
             <list style="hanging" hangIndent="6">
                 <t hangText="PS type:">
