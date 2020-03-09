@@ -617,7 +617,19 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
    
     <t>
         The structure of the DIO control message is extended, within the pre-defined DIO options.
-        Therefore, the security mechanisms defined in <xref target="RFC6550">RPL</xref> apply to this proposed extension.
+        The additional information are the IPv6 addresses of the parent set of the node transmitting the DIO.
+        This use of this additional information can have the following potential consequences:
+        <list style="symbols">
+            <t>
+                A malicious node that can receive and read the DIO can "see" further than it's own neighbourhood by one hop, learning the addresses of it's two hop neighbors.
+                This is a privacy / network discovery issue.
+            </t>
+            
+            <t>
+                A malicious node that can send DIOs can use the parent set extension to convince neighbours to route through itself, instead of the normal preferred parent they would use.
+                However, this is already possible with other OFs (like <xref target="RFC6552">OF0</xref> and <xref target="RFC6719">MRHOF</xref>) by reporting a fake rank value in the DIO, thus masquerading as the DODAG root.
+            </t>
+        </list>
     </t>
 
 </section>
@@ -663,6 +675,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <?rfc include="reference.RFC.8557"?>                        <!-- Deterministic Networking Problem Statement -->
         <?rfc include="reference.RFC.6550"?>                         <!-- RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks -->
         <?rfc include="reference.RFC.6551"?>                         <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
+        <?rfc include="reference.RFC.6552"?>                         <!-- Objective Function Zero for the Routing Protocol for Low-Power and Lossy Networks (RPL) -->
         <?rfc include="reference.RFC.6719"?>                        <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
         <!-- <?rfc include="reference.RFC.8138"?> -->               <!-- IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing Header -->
         <!-- <?rfc include="reference.RFC.8180"?> -->                <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
