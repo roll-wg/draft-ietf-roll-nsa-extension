@@ -560,8 +560,12 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </t>
         
         <t>
-            The PS is used only within NSA objects configured as constraints and is used as per <xref target="RFC6551"/>.
-            As a result, the PS does not affect the calculation of the rank through candidate neighbors.
+            The PS is used only within NSA objects configured as a metric, therefore the DAG Metric Container field "C" MUST be 0.
+            Additionally, since the information in the PS needs to be propagated downstream but it cannot be aggregated, the DAG Metric Container field "R" MUST be 1.
+            Finally, since the information contained is by definition partial, more specifically just the parent set of the DIO-sending node, the DAG Metric Container field "P" MUST be 1.
+        </t>
+        <t>    
+        It is important that the PS does not affect the calculation of the rank through candidate neighbors.
             It is only used with the CA OF to remove nodes which do not fulfill the CA OF criteria from the candidate neighbor list.
         </t>
             
