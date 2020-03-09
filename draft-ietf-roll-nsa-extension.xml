@@ -116,18 +116,18 @@
 <!--section title="TEMPORARY EDITORIAL NOTES">
 
    <t>
-		This document is an Internet Draft, so it is work-in-progress by nature.
-   		It contains the following work-in-progress elements:
-   </t>	
-     		 
+        This document is an Internet Draft, so it is work-in-progress by nature.
+           It contains the following work-in-progress elements:
+   </t>    
+              
    <t>
-   	<list style="symbols">
-		<t>"TODO" statements are elements which have not yet been written by the authors 
-		for some reason (lack of time, ongoing discussions with no clear consensus, etc).
-		The statement does indicate that the text will be written at some time.</t>
-   	</list>
+       <list style="symbols">
+        <t>"TODO" statements are elements which have not yet been written by the authors 
+        for some reason (lack of time, ongoing discussions with no clear consensus, etc).
+        The statement does indicate that the text will be written at some time.</t>
+       </list>
    </t>
-   		 
+            
 </section --> 
 
 
@@ -177,11 +177,11 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <t>
 
         For the path information, this specification focuses on the extensions to the <xref target="RFC6551">DAG Metric Container</xref> required for providing the PRE mechanism a part of the information it needs to operate.
-		This information is the <xref target="RFC6550">RPL</xref> parent address set of a node and it must be sent to potential children of the node.
-		The RPL DIO Control Message is the canonical way of broadcasting this kind of information and therefore its <xref target="RFC6551">DAG Metric Container</xref> field is used to append a Node State and Attribute (NSA) object.
-		The node's parent address set is stored as an optional TLV within the NSA object.
-		This specification defines the type value and structure for the parent address set TLV.
-    </t>	
+        This information is the <xref target="RFC6550">RPL</xref> parent address set of a node and it must be sent to potential children of the node.
+        The RPL DIO Control Message is the canonical way of broadcasting this kind of information and therefore its <xref target="RFC6551">DAG Metric Container</xref> field is used to append a Node State and Attribute (NSA) object.
+        The node's parent address set is stored as an optional TLV within the NSA object.
+        This specification defines the type value and structure for the parent address set TLV.
+    </t>    
 
 </section> 
 
@@ -457,13 +457,13 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             However, <xref target="RFC6550">RPL</xref>, does not define how to propagate parent set related information, which is what this document addresses. 
         </t>
 
-    	<t>
-        	DIO messages can carry multiple options, out of which the <xref target="RFC6551">DAG Metric Container option</xref> is the most suitable structurally and semantically for the purpose of carrying the parent set.
-        	The DAG Metric Container option itself can carry different nested objects, out of which the <xref target="RFC6551">Node State and Attribute (NSA)</xref> is appropriate for transferring generic node state data.
-        	Within the Node State and Attribute it is possible to store optional TLVs representing various node characteristics.
-        	As per the <xref target="RFC6551">Node State and Attribute (NSA)</xref> description, no TLV has been defined for use.
-        	This document defines one TLV for the purpose of transmitting a node's parent set.
-    	</t>
+        <t>
+            DIO messages can carry multiple options, out of which the <xref target="RFC6551">DAG Metric Container option</xref> is the most suitable structurally and semantically for the purpose of carrying the parent set.
+            The DAG Metric Container option itself can carry different nested objects, out of which the <xref target="RFC6551">Node State and Attribute (NSA)</xref> is appropriate for transferring generic node state data.
+            Within the Node State and Attribute it is possible to store optional TLVs representing various node characteristics.
+            As per the <xref target="RFC6551">Node State and Attribute (NSA)</xref> description, no TLV has been defined for use.
+            This document defines one TLV for the purpose of transmitting a node's parent set.
+        </t>
 
         <figure title="Example DIO Message with a DAG Metric Container option" anchor="fig_dio">
 <artwork><![CDATA[
@@ -626,10 +626,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
   <?rfc compact="yes" ?>
 
 <!-- <section title="Acknowledgments">
-  		<t>
-  			TODO: We are grateful to XXXX YYYYY and KKKK LLLL for their comments that 
-  			lead to many improvements to this document. 
-  		</t>
+          <t>
+              TODO: We are grateful to XXXX YYYYY and KKKK LLLL for their comments that 
+              lead to many improvements to this document. 
+          </t>
 </section> -->
 
 
@@ -647,25 +647,25 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <?rfc include='reference.RFC.2119'?>
         <?rfc include="reference.RFC.8655"?>                        <!-- Deterministic Networking Architecture -->
         <?rfc include="reference.RFC.8557"?>                        <!-- Deterministic Networking Problem Statement -->
-        <?rfc include="reference.RFC.6550"?> 						<!-- RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks -->
-        <?rfc include="reference.RFC.6551"?> 						<!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
+        <?rfc include="reference.RFC.6550"?>                         <!-- RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks -->
+        <?rfc include="reference.RFC.6551"?>                         <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
         <?rfc include="reference.RFC.6719"?>                        <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
         <!-- <?rfc include="reference.RFC.8138"?> -->               <!-- IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing Header -->
-        <!-- <?rfc include="reference.RFC.8180"?> -->			    <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
-		<?rfc include='reference.I-D.ietf-6tisch-architecture'?>	<!-- 6TiSCH: 6TiSCH architecture -->
-		<!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> --> <!-- 6TiSCH: 6top protocol -->
-		<?rfc include='reference.I-D.ietf-detnet-architecture'?>	<!-- DetNet: DetNet architecture -->
-		<?rfc include='reference.I-D.papadopoulos-6tisch-pre-reqs'?>	<!-- Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs -->
+        <!-- <?rfc include="reference.RFC.8180"?> -->                <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
+        <?rfc include='reference.I-D.ietf-6tisch-architecture'?>    <!-- 6TiSCH: 6TiSCH architecture -->
+        <!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> --> <!-- 6TiSCH: 6top protocol -->
+        <?rfc include='reference.I-D.ietf-detnet-architecture'?>    <!-- DetNet: DetNet architecture -->
+        <?rfc include='reference.I-D.papadopoulos-6tisch-pre-reqs'?>    <!-- Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs -->
         
         
   </references>
   
   <references title="Other Informative References">
-  	<reference anchor="IEEE802154">
-    	<front>
-        	<title>
-        	   IEEE Std 802.15.4 Standard for Low-Rate Wireless Personal Area Networks (WPANs)
-        	</title>
+      <reference anchor="IEEE802154">
+        <front>
+            <title>
+               IEEE Std 802.15.4 Standard for Low-Rate Wireless Personal Area Networks (WPANs)
+            </title>
             <author>
                <organization>IEEE standard for Information Technology</organization>
             </author>
