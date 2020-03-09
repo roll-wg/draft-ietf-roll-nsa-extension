@@ -170,7 +170,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
    </t>
 
     <t>
-        This document describes a new objective function (OF) called the Common Ancestor (CA) OF.
+        This document describes a new Objective Function (OF) called the Common Ancestor (CA) OF.
         A detailed description is given of how the path information is used within the CA OF and how the subset of parents for forwarding packets is selected.
         This specification defines a new Objective Code Point (OCP) for the CA OF.
     </t>
@@ -226,108 +226,25 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
 </section>
 
-<section title="Common Ancestor Objective Function">
-
+<section title="Common Ancestor AP Selection Policies">
     <t>
-		In the RPL protocol, each node maintains a list of potential parents. 
-		For PRE, the Preferred Parent (PP) node is defined to be the same as the RPL DODAG Preferred Parent node. 
-		Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network selects additional parent(s), called alternative parent(s), from its Parent Set (PS).
+        In the RPL protocol, each node maintains a list of potential parents. 
+        For PRE, the Preferred Parent (PP) node is defined to be the same as the RPL DODAG Preferred Parent node. 
+        Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network selects additional parent(s), called alternative parent(s), from its Parent Set (PS).
     </t>
 
     <t>
-		There are multiple possible policies of selecting the AP node. This functionality is included in the operation of the RPL Objective Function (OF).
-		An OF which allows the multiple paths to remain correlated is detailed here.
-		More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
-        For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>.
-		If multiple potential APs match this condition, the AP with the lowest rank will be registered.
+        There are multiple possible policies of selecting the AP node.
+        This section details three such possible policies.
     </t>
 
     <t>
-        The OF described here is an extension of the <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref> (MRHOF).
-        In general, this OF extends MRHOF by specifying how an AP is selected.
-        Importantly, the calculation of the rank of the node through each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
-    </t>
-
-    <t>
-        The ways in which the CA OF modifies MRHOF in a section-by-section manner follows in detail:
-        <list style="hanging">
-            <t hangText='MRHOF Section 3. "The Minimum Rank with Hysteresis Objective Function":'>
-                Same as MRHOF extended to AP selection.
-                Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors.
-            </t>
-            <t hangText='MRHOF Section 3.1. "Computing the Path Cost":'>
-                Same as MRHOF extended to AP selection.
-                If a candidate neighbor does not fulfill the CA requirement then the path through that neighbor SHOULD be set to MAX_PATH_COST, the same value used by MRHOF.
-                As a result, the node MUST NOT select the candidate neighbor as its AP.
-            </t>
-            <t hangText='MRHOF Section 3.2. "Parent Selection":'>
-                Same as MRHOF extended to AP selection.
-                To allow hysteresis, AP selection maintains a variable, cur_ap_min_path_cost, which is the path cost of the current AP.
-            </t>
-            <t hangText='MRHOF Section 3.2.1. "When Parent Selection Runs":'>
-                Same as MRHOF.
-            </t>
-            <t hangText='MRHOF Section 3.2.2. "Parent Selection Algorithm":'>
-                Same as MRHOF extended to AP selection.
-                If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD (the same variable as MRHOF uses), the node MAY continue to use the current AP.
-                Additionally, if there is no PP selected, there MUST NOT be any AP selected as well.
-                Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its alternative parent set.
-                The value of PARENT_SET_SIZE is the same as in MRHOF.
-            </t>
-            <t hangText='MRHOF Section 3.3. "Computing Rank":'>
-                Same as MRHOF.
-            </t>
-            <t hangText='MRHOF Section 3.4. "Advertising the Path Cost":'>
-                Same as MRHOF.
-            </t>
-            <t hangText='MRHOF Section 3.5. "Working without Metric Containers":'>
-                It is not possible to work without metric containers, since CA AP selection requires information from parents regarding their parent sets, which is transmitted via the NSA object in the DIO Mectric Container.
-            </t>
-            <t hangText='MRHOF Section 4. "Using MRHOF for Metric Maximization":'>
-                Same as MRHOF.
-            </t>
-            <t hangText='MRHOF Section 5. "MRHOF Variables and Parameters":'>
-                Same as MRHOF extended to AP selection.
-                The CA OF operates like MRHOF for AP selection by maintaining separate:
-                <list style="hanging">
-                    <t hangText="AP:">
-                        Corresponding to the MRHOF PP.
-                        Hysteresis is configured for AP with the same PARENT_SWITCH_THRESHOLD parameter as in MRHOF.
-                        The AP MUST NOT be the same as the PP.
-                    </t>
-                    <t hangText="Alternative parent set:">
-                        Corresponding to the MRHOF parent set.
-                        The size is defined by the same PARENT_SET_SIZE parameter as in MRHOF.
-                        The Alternative parent set MUST be a non-strict subset of the parent set.
-                    </t>
-                    <t hangText="cur_ap_min_path_cost:">
-                        Corresponding to the MRHOF cur_min_path_cost variable.
-                        To support the operation of the hysteresis function for AP selection.
-                    </t>
-                </list>
-            </t>
-            <t hangText='MRHOF Section 6. "Manageability":'>
-                Same as MRHOF.
-            </t>
-            <t hangText='MRHOF Section 6.1. "Device Configuration":'>
-                Same as MRHOF.
-            </t>
-            <t hangText='MRHOF Section 6.2. "Device Monitoring":'>
-                Same as MRHOF.
-            </t>
-        </list>
-
-    </t>
-
-    <t>
-        Three OF policies are defined which perform AP selection based on common ancestors, named Common Ancestor Strict, Common Ancestor Medium, and Common Ancestor Relaxed, depending on how restrictive the selection process is.
+        All three policies defined perform AP selection based on common ancestors, named Common Ancestor Strict, Common Ancestor Medium, and Common Ancestor Relaxed, depending on how restrictive the selection process is.
         A more restrictive policy will limit flooding but might fail to select an appropriate AP, while a less restrictive one will more often find an appropriate AP but might increase flooding.
-        The OF uses the same Objective Code Point (OCP): TBD1 for all policies used.
     </t>
 
     <t>
-        All three OF policies apply their corresponding common ancestor criterion to filter the list of candidate neighbours in the alternative parent set.
-        The AP is then selected from the alternative parent set based on Rank and using hysteresis as is done for the PP in MRHOF.
+        All three policies apply their corresponding common ancestor criterion to filter the list of candidate neighbours in the alternative parent set.
     </t>
     
     <section title="Common Ancestor Strict" anchor="sec_ca_strict">
@@ -435,8 +352,105 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </t>    
 
     </section>
+
+
+</section>
+
+
+<section title="Common Ancestor Objective Function">
+
+
+    <t>
+        An OF which allows the multiple paths to remain correlated is detailed here.
+        More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
+        For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>.
+        If multiple potential APs match this condition, the AP with the lowest rank will be registered.
+    </t>
+
+    <t>
+        The OF described here is an extension of the <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref> (MRHOF).
+        In general, this OF extends MRHOF by specifying how an AP is selected.
+        Importantly, the calculation of the rank of the node through each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
+    </t>
+
+    <t>
+        The ways in which the CA OF modifies MRHOF in a section-by-section manner follows in detail:
+        <list style="hanging">
+            <t hangText='MRHOF Section 3. "The Minimum Rank with Hysteresis Objective Function":'>
+                Same as MRHOF extended to AP selection.
+                Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors.
+            </t>
+            <t hangText='MRHOF Section 3.1. "Computing the Path Cost":'>
+                Same as MRHOF extended to AP selection.
+                If a candidate neighbor does not fulfill the CA requirement then the path through that neighbor SHOULD be set to MAX_PATH_COST, the same value used by MRHOF.
+                As a result, the node MUST NOT select the candidate neighbor as its AP.
+            </t>
+            <t hangText='MRHOF Section 3.2. "Parent Selection":'>
+                Same as MRHOF extended to AP selection.
+                To allow hysteresis, AP selection maintains a variable, cur_ap_min_path_cost, which is the path cost of the current AP.
+            </t>
+            <t hangText='MRHOF Section 3.2.1. "When Parent Selection Runs":'>
+                Same as MRHOF.
+            </t>
+            <t hangText='MRHOF Section 3.2.2. "Parent Selection Algorithm":'>
+                Same as MRHOF extended to AP selection.
+                If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD (the same variable as MRHOF uses), the node MAY continue to use the current AP.
+                Additionally, if there is no PP selected, there MUST NOT be any AP selected as well.
+                Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its alternative parent set.
+                The value of PARENT_SET_SIZE is the same as in MRHOF.
+            </t>
+            <t hangText='MRHOF Section 3.3. "Computing Rank":'>
+                Same as MRHOF.
+            </t>
+            <t hangText='MRHOF Section 3.4. "Advertising the Path Cost":'>
+                Same as MRHOF.
+            </t>
+            <t hangText='MRHOF Section 3.5. "Working without Metric Containers":'>
+                It is not possible to work without metric containers, since CA AP selection requires information from parents regarding their parent sets, which is transmitted via the NSA object in the DIO Mectric Container.
+            </t>
+            <t hangText='MRHOF Section 4. "Using MRHOF for Metric Maximization":'>
+                Same as MRHOF.
+            </t>
+            <t hangText='MRHOF Section 5. "MRHOF Variables and Parameters":'>
+                Same as MRHOF extended to AP selection.
+                The CA OF operates like MRHOF for AP selection by maintaining separate:
+                <list style="hanging">
+                    <t hangText="AP:">
+                        Corresponding to the MRHOF PP.
+                        Hysteresis is configured for AP with the same PARENT_SWITCH_THRESHOLD parameter as in MRHOF.
+                        The AP MUST NOT be the same as the PP.
+                    </t>
+                    <t hangText="Alternative parent set:">
+                        Corresponding to the MRHOF parent set.
+                        The size is defined by the same PARENT_SET_SIZE parameter as in MRHOF.
+                        The Alternative parent set MUST be a non-strict subset of the parent set.
+                    </t>
+                    <t hangText="cur_ap_min_path_cost:">
+                        Corresponding to the MRHOF cur_min_path_cost variable.
+                        To support the operation of the hysteresis function for AP selection.
+                    </t>
+                </list>
+            </t>
+            <t hangText='MRHOF Section 6. "Manageability":'>
+                Same as MRHOF.
+            </t>
+            <t hangText='MRHOF Section 6.1. "Device Configuration":'>
+                Same as MRHOF.
+            </t>
+            <t hangText='MRHOF Section 6.2. "Device Monitoring":'>
+                Same as MRHOF.
+            </t>
+        </list>
+
+    </t>
+
     
     <section title="Usage">
+        <t>
+            All OF policies apply their corresponding criterion to filter the list of candidate neighbours in the alternative parent set.
+            The AP is then selected from the alternative parent set based on Rank and using hysteresis as is done for the PP in MRHOF.
+            It is noteworthy that the OF uses the same Objective Code Point (OCP): TBD1 for all policies used.
+        </t>
 
         <t>
             The PS information can be used by any of the described AP selection policies or other ones not described here, depending on requirements.
