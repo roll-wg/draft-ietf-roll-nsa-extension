@@ -101,8 +101,8 @@
    <abstract>
    <t>
         Packet Replication and Elimination is a method in which several copies of a data packet are sent in the network in order to achieve high reliability and low jitter.
-        This document details how to apply Packet Replication and Elimination in RPL, especially how to exchange information to let a node better select the different parents that will be used to  forward the multiple copies of a packet.
-        This document also describes Objectives Functions which take advantage of this information to implement multi-path routing.
+        This document details how to apply Packet Replication and Elimination in RPL, especially how to exchange information within RPL control packets to let a node better select the different parents that will be used to  forward the multiple copies of a packet.
+        This document also describes the Objective Function which takes advantage of this information to implement multi-path routing.
    </t>
    </abstract>
    
