@@ -251,42 +251,42 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <t>
         The ways in which the CA OF modifies MRHOF in a section-by-section manner follows in detail:
         <list style="hanging">
-            <t hangText="MRHOF-3.  The Minimum Rank with Hysteresis Objective Function:">
+            <t hangText='MRHOF Section 3. "The Minimum Rank with Hysteresis Objective Function":'>
                 Same as MRHOF extended to AP selection.
                 Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors.
             </t>
-            <t hangText="MRHOF-3.1.  Computing the Path Cost:">
+            <t hangText='MRHOF Section 3.1. "Computing the Path Cost":'>
                 Same as MRHOF extended to AP selection.
                 If a candidate neighbor does not fulfill the CA requirement then the path through that neighbor SHOULD be set to MAX_PATH_COST, the same value used by MRHOF.
                 As a result, the node MUST NOT select the candidate neighbor as its AP.
             </t>
-            <t hangText="MRHOF-3.2.  Parent Selection:">
+            <t hangText='MRHOF Section 3.2. "Parent Selection":'>
                 Same as MRHOF extended to AP selection.
                 To allow hysteresis, AP selection maintains a variable, cur_ap_min_path_cost, which is the path cost of the current AP.
             </t>
-            <t hangText="MRHOF-3.2.1.  When Parent Selection Runs:">
+            <t hangText='MRHOF Section 3.2.1. "When Parent Selection Runs":'>
                 Same as MRHOF.
             </t>
-            <t hangText="MRHOF-3.2.2.  Parent Selection Algorithm:">
+            <t hangText='MRHOF Section 3.2.2. "Parent Selection Algorithm":'>
                 Same as MRHOF extended to AP selection.
                 If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD (the same variable as MRHOF uses), the node MAY continue to use the current AP.
                 Additionally, if there is no PP selected, there MUST NOT be any AP selected as well.
                 Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its alternative parent set.
                 The value of PARENT_SET_SIZE is the same as in MRHOF.
             </t>
-            <t hangText="MRHOF-3.3.  Computing Rank:">
+            <t hangText='MRHOF Section 3.3. "Computing Rank":'>
                 Same as MRHOF.
             </t>
-            <t hangText="MRHOF-3.4.  Advertising the Path Cost:">
+            <t hangText='MRHOF Section 3.4. "Advertising the Path Cost":'>
                 Same as MRHOF.
             </t>
-            <t hangText="MRHOF-3.5.  Working without Metric Containers:">
+            <t hangText='MRHOF Section 3.5. "Working without Metric Containers":'>
                 It is not possible to work without metric containers, since CA AP selection requires information from parents regarding their parent sets, which is transmitted via the NSA object in the DIO Mectric Container.
             </t>
-            <t hangText="MRHOF-4.  Using MRHOF for Metric Maximization:">
+            <t hangText='MRHOF Section 4. "Using MRHOF for Metric Maximization":'>
                 Same as MRHOF.
             </t>
-            <t hangText="MRHOF-5.  MRHOF Variables and Parameters:">
+            <t hangText='MRHOF Section 5. "MRHOF Variables and Parameters":'>
                 Same as MRHOF extended to AP selection.
                 The CA OFs operate like MRHOF for AP selection by maintaining separate:
                 <list style="hanging">
@@ -306,13 +306,13 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
                     </t>
                 </list>
             </t>
-            <t hangText="MRHOF-6.  Manageability:">
+            <t hangText='MRHOF Section 6. "Manageability":'>
                 Same as MRHOF.
             </t>
-            <t hangText="MRHOF-6.1.  Device Configuration:">
+            <t hangText='MRHOF Section 6.1. "Device Configuration":'>
                 Same as MRHOF.
             </t>
-            <t hangText="MRHOF-6.2.  Device Monitoring:">
+            <t hangText='MRHOF Section 6.2. "Device Monitoring":'>
                 Same as MRHOF.
             </t>
         </list>
