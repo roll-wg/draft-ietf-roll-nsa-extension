@@ -823,6 +823,28 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       </t>
       
   </section>
+
+  <section title="Choosing an AP selection policy">
+    <t>
+        The manner of choosing an AP selection policy is left to the implementation, for maximum flexibility.
+    </t>
+    
+    <t>
+        For example, a different policy can be used per traffic type.
+        The network configurator can choose the CA Relaxed policy to increase reliability (thus producing some flooding) for specific, extremely important, alert packets.
+        On the other hand, all normal data traffic uses the CA Strict policy.
+        Therefore, an exception is made just for the alert packets.
+    </t>
+
+    <t>
+        Another option would be to devise a new disjoint policy, where the paths are on purpose non-correlated, to increase path diversity and resilience against whole groups of nodes failing.
+        The disadvantage may be increased jitter.
+    </t>
+    
+    <t>
+        Finally, a network configurator may provide the CA policies with a preference order of Strict > Medium > Relaxed as a means of falling back to more flood-prone policies to maintain reliability.
+    </t>
+  </section>
      
 </back> 
 </rfc>
