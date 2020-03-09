@@ -100,10 +100,9 @@
 
    <abstract>
    <t>
-        Implementing Packet Replication and Elimination from/to the RPL root requires the ability to forward copies of packets over different paths via different RPL parents.
-        Selecting the appropriate parents to achieve ultra-low latency and jitter requires information about a node's parents.
-        This document details what information needs to be transmitted and how it is encoded within RPL control packets to enable this functionality.
-        This document also describes an Objective Function which takes advantage of this information to implement multi-path routing.
+        Packet Replication and Elimination is a method in which several copies of a data packet are sent in the network in order to achieve high reliability and low jitter.
+        This document details how to apply Packet Replication and Elimination in RPL, especially how to exchange information to let a node better select the different parents that will be used to  forward the multiple copies of a packet.
+        This document also describes Objectives Functions which take advantage of this information to implement multi-path routing.
    </t>
    </abstract>
    
@@ -136,27 +135,27 @@
 <section title="Introduction">
 
     <t>
-        Network-enabled applications in the industrial context must provide stringent guarantees in terms of reliability and predictability.
+        Networks in the industrial context must provide stringent guarantees in terms of reliability and predictability, with this domain being one of main ones addressed by <xref target="RFC8557">Deterministic Networking</xref>.
         <xref target="I-D.papadopoulos-6tisch-pre-reqs">Packet Replication and Elimination (PRE)</xref> is a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
         
-        Allowing these kinds of applications to function over wireless networks requires the application of the principles of <xref target="I-D.ietf-detnet-architecture">Deterministic Networking</xref>.
+        Allowing industrial applications to function over wireless networks requires the application of the principles and <xref target="RFC8655">architecture of Deterministic Networking</xref>.
         This results in designs which aim at optimizing packet delivery rate and bounding latency.
 
-        Additionally, given that the network nodes often have a limited energy supply, energy consumption needs to be minimized as well.
+        Additionally, nodes operating on battery need to minimize their energy consumption.
     </t>
 
 
     <t>  
         As an example, to meet this goal, <xref target="IEEE802154">IEEE Std. 802.15.4</xref> provides Time-Slotted Channel Hopping (TSCH), a mode of operation which uses a common communication schedule
 based on timeslots to allow deterministic medium access as well as channel hopping to work around radio interference.
-        However, since TSCH uses retransmissions in the event of a failed transmission, end-to-end delay and jitter performance can deteriorate.
+        However, since TSCH uses retransmissions in the event of a failed transmission, end-to-end latency and jitter performance can deteriorate.
    </t>
    
    
    <t>
-        Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on the issues previously highlighted and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to address that case.
+        Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on these issues and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to address that case.
         
-        Building on this architecture, <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref> leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and to limit jitter.
+        Building on this architecture, <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref> leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and thus to limit jitter.
    </t>
    
    <t>
@@ -165,7 +164,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         
         PRE can follow the Destination-Oriented Directed Acyclic Graph (DODAG) formed by RPL from a node to the root. 
         Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, a subset of which is used to forward packets.
-        In order for this subset to be defined, a RPL parent subset selection mechanism, which is among the responsibilities of the RPL Objective Function (OF), needs to have specific path information.
+        In order to select parents to be part of this subset, the RPL Objective Function (OF) needs additional information regarding the multi-path nature of PRE.
+
         This document describes OFs which implement multi-path routing for PRE and specifies the transmission of this specific path information.
    </t>
 
@@ -206,7 +206,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 <!--                 See <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> for more. -->
 <!--             </t> -->
             <t hangText="Packet Replication and Elimination (PRE):">
-                A method which transmits multiple copies of a packet using multi-path forwarding over a multi-hop network and which consolidates multiple received packet copies to control flooding.
+                A method which consists of transmitting multiple copies of a packet using multi-path forwarding over a multi-hop network and which consolidates multiple received packet copies to control flooding.
                 See <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref> for more details.
             </t>
             <t hangText="Parent Set (PS):">
@@ -231,12 +231,12 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <t>
 		In the RPL protocol, each node maintains a list of potential parents. 
 		For PRE, the Preferred Parent (PP) node is defined to be the same as the RPL DODAG Preferred Parent node. 
-		Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network registers an AP node as well from its Parent Set (PS).
+		Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network selects additional parent(s), called alternative parent(s), from its Parent Set (PS).
     </t>
 
     <t>
 		There are multiple alternative methods of selecting the AP node. This functionality is included in the operation of the RPL Objective Function (OF).
-		An OF which allows the two paths to remain correlated is detailed here.
+		An OF which allows the multiple paths to remain correlated is detailed here.
 		More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
         For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>.
 		If multiple potential APs match this condition, the AP with the lowest rank will be registered.
@@ -645,6 +645,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
   <references title="Informative references">
         <?rfc include='reference.RFC.2119'?>
+        <?rfc include="reference.RFC.8655"?>                        <!-- Deterministic Networking Architecture -->
+        <?rfc include="reference.RFC.8557"?>                        <!-- Deterministic Networking Problem Statement -->
         <?rfc include="reference.RFC.6550"?> 						<!-- RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks -->
         <?rfc include="reference.RFC.6551"?> 						<!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
         <?rfc include="reference.RFC.6719"?>                        <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
