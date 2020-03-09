@@ -166,7 +166,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, a subset of which is used to forward packets.
         In order to select parents to be part of this subset, the RPL Objective Function (OF) needs additional information regarding the multi-path nature of PRE.
 
-        This document describes OFs which implement multi-path routing for PRE and specifies the transmission of this specific path information.
+        This document describes an OF which implements multi-path routing for PRE and specifies the transmission of this specific path information.
    </t>
 
     <t>
@@ -235,7 +235,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     </t>
 
     <t>
-		There are multiple alternative methods of selecting the AP node. This functionality is included in the operation of the RPL Objective Function (OF).
+		There are multiple possible policies of selecting the AP node. This functionality is included in the operation of the RPL Objective Function (OF).
 		An OF which allows the multiple paths to remain correlated is detailed here.
 		More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
         For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>.
@@ -288,7 +288,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             </t>
             <t hangText='MRHOF Section 5. "MRHOF Variables and Parameters":'>
                 Same as MRHOF extended to AP selection.
-                The CA OFs operate like MRHOF for AP selection by maintaining separate:
+                The CA OF operates like MRHOF for AP selection by maintaining separate:
                 <list style="hanging">
                     <t hangText="AP:">
                         Corresponding to the MRHOF PP.
@@ -320,13 +320,13 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     </t>
 
     <t>
-        Three OFs are defined which perform AP selection based on common ancestors, named Common Ancestor Strict, Common Ancestor Medium, and Common Ancestor Relaxed, depending on how restrictive the selection process is.
-        A more restrictive method will limit flooding but might fail to select an appropriate AP, while a less restrictive one will more often find an appropriate AP but might increase flooding.
-        The OFs are all represented with the same Objective Code Point (OCP): TBD1.
+        Three OF policies are defined which perform AP selection based on common ancestors, named Common Ancestor Strict, Common Ancestor Medium, and Common Ancestor Relaxed, depending on how restrictive the selection process is.
+        A more restrictive policy will limit flooding but might fail to select an appropriate AP, while a less restrictive one will more often find an appropriate AP but might increase flooding.
+        The OF uses the same Objective Code Point (OCP): TBD1 for all policies used.
     </t>
 
     <t>
-        All three OFs apply their corresponding common ancestor criterion to filter the list of candidate neighbours in the alternative parent set.
+        All three OF policies apply their corresponding common ancestor criterion to filter the list of candidate neighbours in the alternative parent set.
         The AP is then selected from the alternative parent set based on Rank and using hysteresis as is done for the PP in MRHOF.
     </t>
     
@@ -336,7 +336,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             In the CA Strict OF the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is the same as the PP of the potential AP.
         </t>
 
-        <figure title="Example Common Ancestor Strict Alternative Parent Selection method" anchor="fig_ca_alternative_parent_selection">
+        <figure title="Example Common Ancestor Strict Alternative Parent Selection policy" anchor="fig_ca_alternative_parent_selection">
 <artwork><![CDATA[
 
                (  R  ) root              
@@ -364,7 +364,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <t>
             For example, in <xref target="fig_ca_alternative_parent_selection"/>, the source node S must know its grandparent sets through nodes A, B, C, and D.
             The Parent Sets (PS) and the Preferred Parents (PS) of nodes A, B, C, and D are shown on the side of the figure.
-            The CA Strict parent selection method will select an AP for node S for which PP(PP(S)) = PP(AP).
+            The CA Strict parent selection policy will select an AP for node S for which PP(PP(S)) = PP(AP).
             Given that PP(PP(S)) = Y:
             <list style="symbols">
                 <t>
@@ -390,7 +390,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </t>
         
         <t> 
-            Using the same example, in <xref target="fig_ca_alternative_parent_selection"/>, the CA Medium parent selection method will select an AP for node S for which PP(PP(S)) is in PS(AP).
+            Using the same example, in <xref target="fig_ca_alternative_parent_selection"/>, the CA Medium parent selection policy will select an AP for node S for which PP(PP(S)) is in PS(AP).
             
             Given that PP(PP(S)) = Y:
             <list style="symbols">
@@ -417,7 +417,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </t>
         
         <t> 
-            Using the same example, in <xref target="fig_ca_alternative_parent_selection"/>, the CA Relaxed parent selection method will select an AP for node S for which PS(PP(S)) has at least one node in common with PS(AP).
+            Using the same example, in <xref target="fig_ca_alternative_parent_selection"/>, the CA Relaxed parent selection policy will select an AP for node S for which PS(PP(S)) has at least one node in common with PS(AP).
             Given that PS(PP(S)) = {X, Y, Z}:
             <list style="symbols">
                 <t>
@@ -439,10 +439,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <section title="Usage">
 
         <t>
-            The PS information can be used by any of the described AP selection methods or other ones not described here, depending on requirements.
-            It is optional for all nodes to use the same AP selection method.
-            Different nodes may use different AP selection methods, since the selection method is local to each node.
-            For example, using different methods can be used to vary the transmission reliability in each hop. 
+            The PS information can be used by any of the described AP selection policies or other ones not described here, depending on requirements.
+            It is optional for all nodes to use the same AP selection policies.
+            Different nodes may use different AP selection policies, since the selection policy is local to each node.
+            For example, using different policies can be used to vary the transmission reliability in each hop. 
         </t>
 
     </section>
