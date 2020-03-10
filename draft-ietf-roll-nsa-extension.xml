@@ -611,7 +611,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         PRE is very helpful when the aim is to increase reliability for a certain path, however its use creates additional traffic as part of the replication process.
         It is conceivable that not all paths have stringent reliability requirements. 
         Therefore, a way to control whether PRE is applied to a path's packets SHOULD be implemented.
-        For example, a traffic class label can be used to determine this behavior per flow type as described in <xref target="I-D.ietf-detnet-architecture">Deterministic Networking Architecture</xref>.
+        For example, a traffic class label can be used to determine this behavior per flow type as described in <xref target="RFC8655">Deterministic Networking Architecture</xref>.
     </t>
 
     
@@ -685,7 +685,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <!-- <?rfc include="reference.RFC.8180"?> -->                <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
         <?rfc include='reference.I-D.ietf-6tisch-architecture'?>    <!-- 6TiSCH: 6TiSCH architecture -->
         <!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> --> <!-- 6TiSCH: 6top protocol -->
-        <?rfc include='reference.I-D.ietf-detnet-architecture'?>    <!-- DetNet: DetNet architecture -->
         <?rfc include='reference.I-D.papadopoulos-6tisch-pre-reqs'?>    <!-- Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs -->
         
         
