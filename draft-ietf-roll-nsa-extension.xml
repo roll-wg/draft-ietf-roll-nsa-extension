@@ -331,7 +331,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         If multiple potential APs match this condition, the AP with the lowest rank will be registered.
       </t>
       <t>
-        The OF described here is an extension of <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref> (MRHOF).
+        The OF described here is an extension of <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref>.
         In general, this OF extends MRHOF by specifying how an AP is selected.
         Importantly, the calculation of the rank of the node through each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
       </t>
