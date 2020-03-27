@@ -132,20 +132,20 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <t>
         Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on these issues and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to address that case.
         
-        Building on this architecture, <xref target="I-D.papadopoulos-raw-pareo-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in LLNs"</xref> leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and thus to limit jitter.
+        Building on this architecture, "Exploiting Packet Replication and Elimination in Complex Tracks in LLNs" <xref target="I-D.papadopoulos-raw-pareo-reqs"/> leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and thus to limit jitter.
       </t>
       <t>
         PRE is a general method of maximizing packet delivery rate and potentially minimizing latency and jitter, not limited to 6TiSCH.
         More specifically, PRE achieves controlled redundancy by laying multiple forwarding paths through the network and using them in parallel for different copies of a same packet.
         
-        PRE can follow the Destination-Oriented Directed Acyclic Graph (DODAG) formed by RPL from a node to the root. 
+        PRE can follow the Destination-Oriented Directed Acyclic Graph (DODAG) formed by <xref target="RFC6550">RPL</xref> from a node to the root. 
         Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, a subset of which is used to forward packets.
         In order to select parents to be part of this subset, the RPL Objective Function (OF) needs additional information regarding the multi-path nature of PRE.
 
         This document describes an OF which implements multi-path routing for PRE and specifies the transmission of this specific path information.
       </t>
       <t>
-        This document describes a new Objective Function (OF) called the Common Ancestor (CA) OF.
+        This document describes a new Objective Function (OF) called the Common Ancestor (CA) OF (see <xref target="ca_of" />).
         A detailed description is given of how the path information is used within the CA OF and how the subset of parents for forwarding packets is selected.
         This specification defines a new Objective Code Point (OCP) for the CA OF.
       </t>
@@ -155,7 +155,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         This information is the <xref target="RFC6550">RPL</xref> parent address set of a node and it must be sent to potential children of the node.
         The RPL DIO Control Message is the canonical way of broadcasting this kind of information and therefore its <xref target="RFC6551">DAG Metric Container</xref> field is used to append a Node State and Attribute (NSA) object.
         The node's parent address set is stored as an optional TLV within the NSA object.
-        This specification defines the type value and structure for the parent address set TLV.
+        This specification defines the type value and structure for the parent address set TLV (see <xref target="PS_TLV" />).
       </t>
     </section>
     <section numbered="true" toc="default">
@@ -180,7 +180,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <dt>Packet Replication and Elimination (PRE):</dt>
         <dd>
                 A method which consists of transmitting multiple copies of a packet using multi-path forwarding over a multi-hop network and which consolidates multiple received packet copies to control flooding.
-                See <xref target="I-D.papadopoulos-raw-pareo-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in LLNs"</xref> for more details.
+                See "Exploiting Packet Replication and Elimination in Complex Tracks in LLNs" <xref target="I-D.papadopoulos-raw-pareo-reqs"/> for more details.
         </dd>
         <dt>Parent Set (PS):</dt>
         <dd>
@@ -322,16 +322,16 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </t>
       </section>
     </section>
-    <section numbered="true" toc="default">
+    <section numbered="true" toc="default" anchor="ca_of">
       <name>Common Ancestor Objective Function</name>
       <t>
         An OF which allows the multiple paths to remain correlated is detailed here.
         More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
-        For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-raw-pareo-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in LLNs"</xref>.
+        For more details about overhearing and its use in this context see the "Promiscuous Overhearing" <xref target="I-D.papadopoulos-raw-pareo-reqs" sectionFormat="of" section="4.3"/>.
         If multiple potential APs match this condition, the AP with the lowest rank will be registered.
       </t>
       <t>
-        The OF described here is an extension of the <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref> (MRHOF).
+        The OF described here is an extension of <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function</xref> (MRHOF).
         In general, this OF extends MRHOF by specifying how an AP is selected.
         Importantly, the calculation of the rank of the node through each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
       </t>
