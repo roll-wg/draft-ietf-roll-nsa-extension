@@ -376,6 +376,11 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <t>
         The ways in which the CA OF modifies MRHOF in a section-by-section manner follows in detail:
         <list style="hanging">
+            <t hangText='MRHOF Section 2. "Terminology". Term "Selected Metric":'>
+                The CA OF uses only one metric, like MRHOF, for rank calculation, with the same MRHOF semantics.
+                For selecting the AP, the PS TLV (stored in the DIO Metric Container Node State and Attribute (NSA) object body, see <xref target="PS_TLV" />) is used.
+                This additional NSA metric is disregarded for the purposes of rank calculation.
+            </t>
             <t hangText='MRHOF Section 3. "The Minimum Rank with Hysteresis Objective Function":'>
                 Same as MRHOF extended to AP selection.
                 Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors.
@@ -463,7 +468,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 
 </section>
 
-<section title="Node State and Attribute (NSA) object type extension">
+<section title="Node State and Attribute (NSA) object type extension" anchor="PS_TLV">
 
         <t>
             In order to select their AP node, nodes need to be aware of their grandparent node sets. 
