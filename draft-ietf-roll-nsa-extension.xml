@@ -79,12 +79,12 @@
     </author>   
       
      
-   <author initials="P" surname="Thubert" fullname="Pascal Thubert">   
+   <author initials="P." surname="Thubert" fullname="Pascal Thubert">   
       <organization abbrev="Cisco">Cisco Systems, Inc</organization>
       <address>
          <postal>
             <street>Building D</street>
-            <street>45 Allee des Ormes - BP1200 </street>
+            <street>45 Allee des Ormes - BP1200</street>
             <city>MOUGINS - Sophia Antipolis</city>
             <code>06254</code>
             <country>FRANCE</country>
