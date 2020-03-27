@@ -338,34 +338,34 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <t>
         The ways in which the CA OF modifies MRHOF in a section-by-section manner follows in detail:
       </t>
-      <dl newline="false" spacing="normal">
-        <dt>MRHOF Section 2. "Terminology". Term "Selected Metric":</dt>
+      <dl newline="true" spacing="normal">
+        <dt><xref target="RFC6719" sectionFormat="comma" section="2" />: "Terminology". Term "Selected Metric":</dt>
         <dd>
                 The CA OF uses only one metric, like MRHOF, for rank calculation, with the same MRHOF semantics.
                 For selecting the AP, the PS TLV (stored in the DIO Metric Container Node State and Attribute (NSA) object body, see <xref target="PS_TLV"/>) is used.
                 This additional NSA metric is disregarded for the purposes of rank calculation.
         </dd>
-        <dt>MRHOF Section 3. "The Minimum Rank with Hysteresis Objective Function":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="3" /> "The Minimum Rank with Hysteresis Objective Function":</dt>
         <dd>
                 Same as MRHOF extended to AP selection.
                 Minimum Rank path selection and switching applies correspondingly to the AP with the extra CA requirement of having some match between ancestors.
         </dd>
-        <dt>MRHOF Section 3.1. "Computing the Path Cost":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="3.1" /> "Computing the Path Cost":</dt>
         <dd>
                 Same as MRHOF extended to AP selection.
                 If a candidate neighbor does not fulfill the CA requirement then the path through that neighbor SHOULD be set to MAX_PATH_COST, the same value used by MRHOF.
                 As a result, the node MUST NOT select the candidate neighbor as its AP.
         </dd>
-        <dt>MRHOF Section 3.2. "Parent Selection":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="3.2" /> "Parent Selection":</dt>
         <dd>
                 Same as MRHOF extended to AP selection.
                 To allow hysteresis, AP selection maintains a variable, cur_ap_min_path_cost, which is the path cost of the current AP.
         </dd>
-        <dt>MRHOF Section 3.2.1. "When Parent Selection Runs":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="3.2.1" /> "When Parent Selection Runs":</dt>
         <dd>
                 Same as MRHOF.
         </dd>
-        <dt>MRHOF Section 3.2.2. "Parent Selection Algorithm":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="3.2.2" /> "Parent Selection Algorithm":</dt>
         <dd>
                 Same as MRHOF extended to AP selection.
                 If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD (the same variable as MRHOF uses), the node MAY continue to use the current AP.
@@ -373,23 +373,23 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
                 Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its alternative parent set.
                 The value of PARENT_SET_SIZE is the same as in MRHOF.
         </dd>
-        <dt>MRHOF Section 3.3. "Computing Rank":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="3.3" /> "Computing Rank":</dt>
         <dd>
                 Same as MRHOF.
         </dd>
-        <dt>MRHOF Section 3.4. "Advertising the Path Cost":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="3.4" /> "Advertising the Path Cost":</dt>
         <dd>
                 Same as MRHOF.
         </dd>
-        <dt>MRHOF Section 3.5. "Working without Metric Containers":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="3.5" /> "Working without Metric Containers":</dt>
         <dd>
                 It is not possible to work without metric containers, since CA AP selection requires information from parents regarding their parent sets, which is transmitted via the NSA object in the DIO Mectric Container.
         </dd>
-        <dt>MRHOF Section 4. "Using MRHOF for Metric Maximization":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="4" /> "Using MRHOF for Metric Maximization":</dt>
         <dd>
                 Same as MRHOF.
         </dd>
-        <dt>MRHOF Section 5. "MRHOF Variables and Parameters":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="5" /> "MRHOF Variables and Parameters":</dt>
         <dd>
           <t>
                 Same as MRHOF extended to AP selection.
@@ -415,15 +415,15 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             </dd>
           </dl>
         </dd>
-        <dt>MRHOF Section 6. "Manageability":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="6" /> "Manageability":</dt>
         <dd>
                 Same as MRHOF.
         </dd>
-        <dt>MRHOF Section 6.1. "Device Configuration":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="6.1" /> "Device Configuration":</dt>
         <dd>
                 Same as MRHOF.
         </dd>
-        <dt>MRHOF Section 6.2. "Device Monitoring":</dt>
+        <dt><xref target="RFC6719" sectionFormat="comma" section="6.2" /> "Device Monitoring":</dt>
         <dd>
                 Same as MRHOF.
         </dd>
