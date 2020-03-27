@@ -136,7 +136,7 @@
 
     <t>
         Networks in the industrial context must provide stringent guarantees in terms of reliability and predictability, with this domain being one of main ones addressed by <xref target="RFC8557">Deterministic Networking</xref>.
-        <xref target="I-D.papadopoulos-6tisch-pre-reqs">Packet Replication and Elimination (PRE)</xref> is a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
+        <xref target="I-D.papadopoulos-raw-pareo-reqs">Packet Replication and Elimination (PRE)</xref> is a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
         
         Allowing industrial applications to function over wireless networks requires the application of the principles and <xref target="RFC8655">architecture of Deterministic Networking</xref>.
         This results in designs which aim at optimizing packet delivery rate and bounding latency.
@@ -155,7 +155,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
    <t>
         Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on these issues and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to address that case.
         
-        Building on this architecture, <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref> leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and thus to limit jitter.
+        Building on this architecture, <xref target="I-D.papadopoulos-raw-pareo-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in LLNs"</xref> leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and thus to limit jitter.
    </t>
    
    <t>
@@ -207,7 +207,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
 <!--             </t> -->
             <t hangText="Packet Replication and Elimination (PRE):">
                 A method which consists of transmitting multiple copies of a packet using multi-path forwarding over a multi-hop network and which consolidates multiple received packet copies to control flooding.
-                See <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref> for more details.
+                See <xref target="I-D.papadopoulos-raw-pareo-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in LLNs"</xref> for more details.
             </t>
             <t hangText="Parent Set (PS):">
                 Given a RPL node, the set of its neighbor nodes which participate in the same RPL DODAG and which can potentially take the role of the node's preferred parent.
@@ -363,7 +363,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <t>
         An OF which allows the multiple paths to remain correlated is detailed here.
         More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
-        For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-6tisch-pre-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs"</xref>.
+        For more details about overhearing and its use in this context see Section 4.3. "Promiscuous Overhearing" in <xref target="I-D.papadopoulos-raw-pareo-reqs">"Exploiting Packet Replication and Elimination in Complex Tracks in LLNs"</xref>.
         If multiple potential APs match this condition, the AP with the lowest rank will be registered.
     </t>
 
@@ -690,7 +690,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <!-- <?rfc include="reference.RFC.8180"?> -->                <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
         <?rfc include='reference.I-D.ietf-6tisch-architecture'?>    <!-- 6TiSCH: 6TiSCH architecture -->
         <!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> --> <!-- 6TiSCH: 6top protocol -->
-        <?rfc include='reference.I-D.papadopoulos-6tisch-pre-reqs'?>    <!-- Exploiting Packet Replication and Elimination in Complex Tracks in 6TiSCH LLNs -->
+        <?rfc include='reference.I-D.papadopoulos-raw-pareo-reqs'?>    <!-- Exploiting Packet Replication and Elimination in Complex Tracks in LLNs -->
         
         
   </references>
