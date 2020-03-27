@@ -631,7 +631,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <!--  <references title="Normative References"> 
   </references> -->
 
-  <references>
+    <displayreference target="RFC6719" to="MRHOF"/>
+    <displayreference target="RFC6550" to="RPL"/>
+    <displayreference target="RFC6552" to="OF0"/>
+    <references>
       <name>References</name>
       <references>
         <name>Informative references</name>
@@ -659,9 +662,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> -->
         <!-- Exploiting Packet Replication and Elimination in Complex Tracks in LLNs -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-papadopoulos-raw-pareo-reqs-01.xml"/>
-      
-        
-  </references>
+      </references>
+    
       <references>
         <name>Other Informative References</name>
         <reference anchor="IEEE802154">
