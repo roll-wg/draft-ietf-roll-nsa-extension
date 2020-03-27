@@ -18,4 +18,5 @@ fi
 
 DRAFT_BASENAME=$( grep -oE 'docName="[^"]*"' < "${DRAFT_FILE}" | grep -oE 'draft-[^"]+' )
 echo "Found ${DRAFT_BASENAME}"
-xml2rfc --text --html --basename="${DRAFT_BASENAME}" "${DRAFT_FILE}"
+xml2rfc --html --v3 --out="${DRAFT_BASENAME}.html" "${DRAFT_FILE}"
+xml2rfc --text --v3 --out="${DRAFT_BASENAME}.txt" "${DRAFT_FILE}"
