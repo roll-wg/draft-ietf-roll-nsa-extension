@@ -245,7 +245,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
          \       \    ||   /             PP(D) = Z                            
            \      \   ||  /                   
              \----\\  || /               || Preferred Parent
-                  (   S   ) source       |  Potential Alternative Parent
+                  (   S   ) source       |  Potential Alt. Parent
 ]]></artwork>
         </figure>
         <t>
@@ -496,11 +496,11 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
  0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|Routing-MC-Type|Res Flags|P|C|O|R| A   |  Prec | Length (bytes)| |MC
+|Routing-MC-Type|Res Flags|P|C|O|R| A   |  Prec | Length (bytes)|   
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|     Res       |  Flags    |A|O|    PS  type   |   PS  Length  | |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ |NSA
-|   PS IPv6 address(es) ...                                       |
+|     Res       |  Flags    |A|O|    PS  type   |   PS  Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+|   PS IPv6 address(es) ...                                       
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 ]]></artwork>
