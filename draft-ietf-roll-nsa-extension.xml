@@ -662,21 +662,16 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> -->
         <!-- Exploiting Packet Replication and Elimination in Complex Tracks in LLNs -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-papadopoulos-raw-pareo-reqs-01.xml"/>
-      </references>
-    
-      <references>
-        <name>Other Informative References</name>
-        <reference anchor="IEEE802154">
+        
+        <reference anchor="IEEE802154" target="http://standards.ieee.org/findstds/standard/802.15.4-2015.html">
           <front>
-            <title>
-               IEEE Std 802.15.4 Standard for Low-Rate Wireless Personal Area Networks (WPANs)
-            </title>
-            <author>
-              <organization>IEEE standard for Information Technology</organization>
+            <title>IEEE Std. 802.15.4, Part. 15.4: Wireless Medium Access Control (MAC) and Physical Layer (PHY) Specifications for Low-Rate Wireless Personal Area Networks</title>
+            <author initials="" surname="IEEE standard for Information Technology">
+              <organization/>
             </author>
             <date year="2015" month="December"/>
           </front>
-        </reference>
+        </reference>        
       </references>
     </references>
     <section numbered="true" toc="default">
