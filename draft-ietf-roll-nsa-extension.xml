@@ -117,7 +117,7 @@
       <name>Introduction</name>
       <t>
         Networks in the industrial context must provide stringent guarantees in terms of reliability and predictability, with this domain being one of main ones addressed by <xref target="RFC8557">Deterministic Networking</xref>.
-        <xref target="I-D.papadopoulos-raw-pareo-reqs">Packet Replication and Elimination (PRE)</xref> is a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
+        Packet Replication and Elimination (PRE) (<xref target="I-D.ietf-6tisch-architecture" sectionFormat="of" section="4.5.3"/>) is a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
         
         Allowing industrial applications to function over wireless networks requires the application of the principles and <xref target="RFC8655">architecture of Deterministic Networking</xref>.
         This results in designs which aim at optimizing packet delivery rate and bounding latency.
@@ -131,8 +131,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       </t>
       <t>
         Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on these issues and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to address that case.
-        
-        Building on this architecture, "Exploiting Packet Replication and Elimination in Complex Tracks in LLNs" <xref target="I-D.papadopoulos-raw-pareo-reqs"/> leverages PRE to improve the Packet Delivery Ratio (PDR), to provide a hard bound to the end-to-end latency, and thus to limit jitter.
       </t>
       <t>
         PRE is a general method of maximizing packet delivery rate and potentially minimizing latency and jitter, not limited to 6TiSCH.
@@ -180,7 +178,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <dt>Packet Replication and Elimination (PRE):</dt>
         <dd>
                 A method which consists of transmitting multiple copies of a packet using multi-path forwarding over a multi-hop network and which consolidates multiple received packet copies to control flooding.
-                See "Exploiting Packet Replication and Elimination in Complex Tracks in LLNs" <xref target="I-D.papadopoulos-raw-pareo-reqs"/> for more details.
+                See "Complex Track with Replication and Elimination" in <xref target="I-D.ietf-6tisch-architecture" sectionFormat="of" section="4.5.3"/> for more details.
         </dd>
         <dt>Parent Set (PS):</dt>
         <dd>
@@ -327,7 +325,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <t>
         An OF which allows the multiple paths to remain correlated is detailed here.
         More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
-        For more details about overhearing and its use in this context see the "Promiscuous Overhearing" <xref target="I-D.papadopoulos-raw-pareo-reqs" sectionFormat="of" section="4.3"/>.
+        For more details about overhearing and its use in this context see the "Complex Track with Replication and Elimination" in <xref target="I-D.ietf-6tisch-architecture" sectionFormat="of" section="4.5.3"/>.
         If multiple potential APs match this condition, the AP with the lowest rank will be registered.
       </t>
       <t>
@@ -617,14 +615,12 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         This proposal also requests the allocation of a new value TBD2 for the "Parent Set" TLV from the Routing Metric/Constraint TLVs sub-registry from IANA.
       </t>
     </section>
-    <!-- <section title="Acknowledgments">
+    <section title="Acknowledgments">
           <t>
-              TODO: We are grateful to XXXX YYYYY and KKKK LLLL for their comments that 
-              lead to many improvements to this document. 
+              We are very grateful to Dominique Barthel, Rahul Jadhav, Fabrice Theoleyre, Diego Dujovne, Derek Jianqiang Hou, and Michael Richardson for their comments, feedback, and support which lead to many improvements to this document.
+              We would also like to thank Tomas Lagos Jenschke very much for helping in the implementation and evaluation of the proposals of this document.
           </t>
-</section> -->
-
-
+    </section>
 
 </middle>
   <back>
@@ -661,7 +657,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <!-- 6TiSCH: 6top protocol -->
         <!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> -->
         <!-- Exploiting Packet Replication and Elimination in Complex Tracks in LLNs -->
-        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-papadopoulos-raw-pareo-reqs-01.xml"/>
         
         <reference anchor="IEEE802154" target="http://standards.ieee.org/findstds/standard/802.15.4-2015.html">
           <front>
