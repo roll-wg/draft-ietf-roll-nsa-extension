@@ -653,7 +653,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
         <!-- <?rfc include="reference.RFC.8180"?> -->
         <!-- 6TiSCH: 6TiSCH architecture -->
-        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-6tisch-architecture-28.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-6tisch-architecture-29.xml"/>
         <!-- 6TiSCH: 6top protocol -->
         <!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> -->
         <!-- Exploiting Packet Replication and Elimination in Complex Tracks in LLNs -->
