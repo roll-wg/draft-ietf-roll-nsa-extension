@@ -31,13 +31,13 @@
       <organization>IMT Atlantique</organization>
       <address>
         <postal>
-          <street>Office B00 - 126A</street>
-          <street>2 Rue de la Chataigneraie</street>
-          <city>Cesson-Sevigne - Rennes</city>
-          <code>35510</code>
+          <street>Office B215</street>
+          <street>4 rue Alfred Kastler, BP 20722</street>
+          <code>44307</code>
+          <city>Nantes Cedex 3</city>
           <country>FRANCE</country>
         </postal>
-        <phone>+33 299 12 70 49</phone>
+<!--         <phone>+33 299 12 70 49</phone> -->
         <email>aris@ariskou.com</email>
       </address>
     </author>
