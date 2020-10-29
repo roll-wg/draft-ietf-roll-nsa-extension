@@ -20,13 +20,13 @@
 <?rfc subcompact="no"?>
 <?rfc authorship="yes"?>
 <?rfc tocappendix="yes"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-09" obsoletes="" updates="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="3" symRefs="true" sortRefs="true" version="3" consensus="true">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-10" obsoletes="" updates="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="3" symRefs="true" sortRefs="true" version="3" consensus="true">
   <!-- xml2rfc v2v3 conversion 2.41.0 -->
   <front>
     <title abbrev="CA OF and PS DAG MC Extension">
         Common Ancestor Objective Function and Parent Set DAG Metric Container Extension
     </title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-roll-nsa-extension-09"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-roll-nsa-extension-10"/>
     <author initials="R.-A." surname="Koutsiamanis" fullname="Remous-Aris Koutsiamanis" role="editor">
       <organization>IMT Atlantique</organization>
       <address>
@@ -612,7 +612,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         This proposal requests the allocation of a new value TBD1 from the "Objective Code Point (OCP)" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry.
       </t>
       <t>
-        This proposal also requests the allocation of a new value TBD2 for the "Parent Set" TLV from the Routing Metric/Constraint TLVs sub-registry from IANA.
+        This proposal also requests the allocation of a new value TBD2 for the "Parent Set" TLV from the "Routing Metric/Constraint TLVs" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL) Routing Metric/Constraint" registry.
       </t>
     </section>
     <section title="Acknowledgments">
@@ -633,6 +633,13 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <references>
       <name>References</name>
       <references>
+        <name>Normative references</name>
+        <!-- RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks -->
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6550.xml"/>
+        <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6551.xml"/>
+      </references>
+      <references>
         <name>Informative references</name>
         <!-- Key words for use in RFCs to Indicate Requirement Levels -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
@@ -640,10 +647,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8655.xml"/>
         <!-- Deterministic Networking Problem Statement -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8557.xml"/>
-        <!-- RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks -->
-        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6550.xml"/>
-        <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
-        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6551.xml"/>
         <!-- Objective Function Zero for the Routing Protocol for Low-Power and Lossy Networks (RPL) -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6552.xml"/>
         <!-- The Minimum Rank with Hysteresis Objective Function -->
