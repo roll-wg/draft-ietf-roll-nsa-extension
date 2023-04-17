@@ -10,7 +10,7 @@ then
 fi
 
 READLINK_BIN=$( which readlink )
-if [ -z "${PYTHON_BIN}" ]
+if [ -z "${READLINK_BIN}" ]
 then
     echo "Could not find readlink in the PATH. Exiting."
     exit 1
