@@ -630,7 +630,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     </section>
     <section title="Acknowledgments">
           <t>
-              We are very grateful to Dominique Barthel, Rahul Jadhav, Fabrice Theoleyre, Diego Dujovne, Derek Jianqiang Hou, and Michael Richardson for their comments, feedback, and support which lead to many improvements to this document.
+              We are very grateful to Dominique Barthel, Rahul Jadhav, Fabrice Theoleyre, Diego Dujovne, Derek Jianqiang Hou, Michael Richardson, and Alvaro Retana for their comments, feedback, and support which lead to many improvements to this document.
               We would also like to thank Tomas Lagos Jenschke very much for helping in the implementation and evaluation of this document.
           </t>
     </section>
