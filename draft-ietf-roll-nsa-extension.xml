@@ -164,6 +164,15 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all capitals, as shown here.
       </t>
       <t>
+        The draft uses the following Terminology from other RFCs:
+      </t>
+      <dl newline="false" spacing="normal">
+        <dt>Parent Set (PS):</dt>
+        <dd>
+                Defined in <xref target="RFC6550">RPL</xref>.
+        </dd>
+      </dl>
+      <t>
         The draft uses the following Terminology:
       </t>
       <dl newline="false" spacing="normal">
@@ -181,10 +190,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <dd>
                 A method that consists of transmitting multiple copies of a packet using multi-path forwarding over a multi-hop network and that consolidates multiple received packet copies to control flooding.
                 See "Complex Track with Replication and Elimination" in <xref target="I-D.ietf-6tisch-architecture" sectionFormat="of" section="4.5.3"/> for more details.
-        </dd>
-        <dt>Parent Set (PS):</dt>
-        <dd>
-                Given an RPL node, the set of its neighbor nodes that participate in the same RPL DODAG and which can potentially take the role of the node's preferred parent.
         </dd>
         <dt>Alternative Parent (AP):</dt>
         <dd>
