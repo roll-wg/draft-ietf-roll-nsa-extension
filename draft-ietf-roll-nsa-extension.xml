@@ -88,8 +88,8 @@
     <workgroup>ROLL</workgroup>
     <abstract>
       <t>
-        Packet Replication and Elimination is a method in which several copies of a data packet are sent in the network in order to achieve high reliability and low jitter.
-        This document details how to apply Packet Replication and Elimination in RPL, especially how to exchange information within RPL control packets to let a node better select the different parents that will be used to forward the multiple copies of a packet.
+        High reliability and low jitter can be achieved by being able to send data packets through multiple paths, via different parents, in a network.
+        This document details how to exchange the necessary information within RPL control packets to let a node better select the different parents that will be used to forward a packet over different paths.
         This document also describes the Objective Function which takes advantage of this information to implement multi-path routing.
       </t>
     </abstract>
@@ -118,7 +118,12 @@
       <name>Introduction</name>
       <t>
         Networks in the industrial context must provide stringent guarantees in terms of reliability and predictability, with this domain being one of the main ones addressed by <xref target="RFC8557">Deterministic Networking</xref>.
-        Packet Replication and Elimination (PRE) (<xref target="I-D.ietf-6tisch-architecture" sectionFormat="of" section="4.5.3"/>) is a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
+        
+        One of the ways of achieving such guarantees is through Packet Replication and Elimination (PRE) (<xref target="I-D.ietf-6tisch-architecture" sectionFormat="of" section="4.5.3"/>), a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
+
+        Another is to have pre-selected backup paths on standby for quick packet retransmission when packet failures occur.
+
+        Load-balancing can be also used to make sure that not all traffic passes through the same nodes, to more evenly spread the packet forwarding load.
         
         Allowing industrial applications to function over wireless networks requires the application of the principles and <xref target="RFC8655">architecture of Deterministic Networking</xref>.
         This results in designs that aim at optimizing packet delivery rate and bounding latency.
@@ -134,14 +139,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on these issues and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to address that case.
       </t>
       <t>
-        PRE is a general method of maximizing packet delivery rate and potentially minimizing latency and jitter, not limited to 6TiSCH.
-        More specifically, PRE achieves controlled redundancy by laying multiple forwarding paths through the network and using them in parallel for different copies of the same packet.
-        
-        PRE can follow the Destination-Oriented Directed Acyclic Graph (DODAG) formed by <xref target="RFC6550">RPL</xref> from a node to the root. 
         Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, a subset of which is used to forward packets.
-        In order to select parents to be part of this subset, the RPL Objective Function (OF) needs additional information regarding the multi-path nature of PRE.
+        In order to select parents to be part of this subset, the RPL Objective Function (OF) needs additional information.
 
-        This document describes an OF which implements multi-path routing for PRE and specifies the transmission of this specific path information.
+        This document describes an OF which implements multi-path routing and specifies the transmission of this specific path information.
       </t>
       <t>
         This document describes a new Objective Function (OF) called the Common Ancestor (CA) OF (see <xref target="ca_of" />).
@@ -150,7 +151,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       </t>
       <t>
 
-        For the path information, this specification focuses on the extensions to the <xref target="RFC6551">DAG Metric Container</xref> required for supplying to the PRE mechanism a part of the information it needs to operate.
+        For the path information, this specification focuses on the extensions to the <xref target="RFC6551">DAG Metric Container</xref> required for supplying to the CA OF a part of the information it needs to operate.
         This information is the <xref target="RFC6550">RPL</xref> parent address set of a node and it must be sent to potential children of the node.
         The RPL DIO Control Message is the canonical way of broadcasting this kind of information and therefore its <xref target="RFC6551">DAG Metric Container</xref> field is used to append a Node State and Attribute (NSA) object.
         The node's parent address set is stored as an optional TLV within the NSA object.
