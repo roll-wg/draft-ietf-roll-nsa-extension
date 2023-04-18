@@ -443,6 +443,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             It is optional for all nodes to use the same AP selection policies.
             Different nodes may use different AP selection policies since the selection policy is local to each node.
             For example, using different policies can be used to vary the transmission reliability in each hop. 
+            Some suggestions are provided in <xref target="appendix_choosing_policy"/>.
         </t>
       </section>
     </section>
@@ -826,7 +827,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </li>
       </ul>
     </section>
-    <section numbered="true" toc="default">
+    <section numbered="true" toc="default" anchor="appendix_choosing_policy">
       <name>Choosing an AP selection policy</name>
       <t>
         The manner of choosing an AP selection policy is left to the implementation, for maximum flexibility.
