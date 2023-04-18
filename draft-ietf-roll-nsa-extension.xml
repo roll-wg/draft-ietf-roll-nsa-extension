@@ -354,7 +354,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <dt><xref target="RFC6719" sectionFormat="comma" section="3" /> "The Minimum Rank with Hysteresis Objective Function":</dt>
         <dd>
                 Same as MRHOF extended to AP selection.
-                Minimum Rank path selection and switching apply correspondingly to the AP with the extra CA requirement of having some match between ancestors.
+                Minimum Rank path selection and switching apply correspondingly to the AP with the extra CA requirement of having some match between ancestors, according to one of the Common Ancestor AP selection policies defined in <xref target="ca_policies"/>.
         </dd>
         <dt><xref target="RFC6719" sectionFormat="comma" section="3.1" /> "Computing the Path Cost":</dt>
         <dd>
