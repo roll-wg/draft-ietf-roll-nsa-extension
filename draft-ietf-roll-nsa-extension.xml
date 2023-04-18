@@ -522,7 +522,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </dd>
         <dt>PS Length:</dt>
         <dd>
-                    The total length of the TLV value field (PS IPv6 address(es)) in bytes.
+                    The total length of the TLV value field (PS IPv6 address(es)) in bytes (0 included).
                     The length is an integral multiple of 16, the number of bytes in an IPv6 address.
         </dd>
         <dt>PS IPv6 address(es)</dt>
