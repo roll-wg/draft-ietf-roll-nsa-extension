@@ -119,7 +119,7 @@
       <t>
         Networks in the industrial context must provide stringent guarantees in terms of reliability and predictability, with this domain being one of the main ones addressed by <xref target="RFC8557">Deterministic Networking</xref>.
         
-        One of the ways of achieving such guarantees is through Packet Replication and Elimination (PRE) (<xref target="I-D.ietf-6tisch-architecture" sectionFormat="of" section="4.5.3"/>), a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
+        One of the ways of achieving such guarantees is through Packet Replication and Elimination (PRE) (<xref target="RFC9030" sectionFormat="of" section="4.5.3"/>), a technique which allows redundant paths in the network to be utilized for traffic requiring higher reliability.
 
         Another is to have pre-selected backup paths on standby for quick packet retransmission when packet failures occur.
 
@@ -136,7 +136,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         However, since TSCH uses retransmissions in the event of a failed transmission, end-to-end latency and jitter performance can deteriorate.
       </t>
       <t>
-        Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on these issues and produced the <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> to address that case.
+        Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on these issues and produced the <xref target="RFC9030">"6TiSCH Architecture"</xref> to address that case.
       </t>
       <t>
         Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, a subset of which is used to forward packets.
@@ -176,20 +176,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         The draft uses the following Terminology:
       </t>
       <dl newline="false" spacing="normal">
-<!--             <dt>Track</dt> -->
-<!--             <dd> -->
-<!--                 A sequence of 6TiSCH schedule resources to support a single-path multi-hop transmission of a packet. -->
-<!--                 See <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> for more. -->
-<!--             </dd> -->
-<!--             <dt>Complex Track</dt> -->
-<!--             <dd> -->
-<!--                 A Track that supports a multi-path multi-hop transmission of a packet. -->
-<!--                 See <xref target="I-D.ietf-6tisch-architecture">"6TiSCH Architecture"</xref> for more. -->
-<!--             </dd> -->
         <dt>Packet Replication and Elimination (PRE):</dt>
         <dd>
                 A method that consists of transmitting multiple copies of a packet using multi-path forwarding over a multi-hop network and that consolidates multiple received packet copies to control flooding.
-                See "Complex Track with Replication and Elimination" in <xref target="I-D.ietf-6tisch-architecture" sectionFormat="of" section="4.5.3"/> for more details.
+                See "Complex Track with Replication and Elimination" in <xref target="RFC9030" sectionFormat="of" section="4.5.3"/> for more details.
         </dd>
         <dt>Alternative Parent (AP):</dt>
         <dd>
@@ -332,7 +322,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <t>
         An OF which allows the multiple paths to remain correlated is detailed here.
         More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
-        For more details about overhearing and its use in this context see the "Complex Track with Replication and Elimination" in <xref target="I-D.ietf-6tisch-architecture" sectionFormat="of" section="4.5.3"/>.
+        For more details about overhearing and its use in this context see the "Complex Track with Replication and Elimination" in <xref target="RFC9030" sectionFormat="of" section="4.5.3"/>.
         If multiple potential APs match this condition, the AP with the lowest rank will be registered.
       </t>
       <t>
@@ -665,7 +655,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
         <!-- <?rfc include="reference.RFC.8180"?> -->
         <!-- 6TiSCH: 6TiSCH architecture -->
-        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-6tisch-architecture-29.xml"/>
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9030.xml"/>
         <!-- 6TiSCH: 6top protocol -->
         <!-- <?rfc include='reference.I-D.ietf-6tisch-6top-protocol'?> -->
         <!-- Exploiting Packet Replication and Elimination in Complex Tracks in LLNs -->
