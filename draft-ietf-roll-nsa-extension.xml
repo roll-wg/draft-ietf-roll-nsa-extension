@@ -597,9 +597,12 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <section numbered="true" toc="default">
       <name>Security Considerations</name>
       <t>
-        The structure of the DIO control message is extended, within the pre-defined DIO options.
+        All the security considerations from <xref target="RFC6550"/>, <xref target="RFC6551"/>, and <xref target="RFC6719"/> apply.
+      </t>
+      <t>
+        In this document, the structure of the DIO control message is extended, within the pre-defined DIO options.
         The additional information is the list of IPv6 addresses of the parent set of the node transmitting the DIO.
-        This use of this additional information can have the following potential consequences:
+        This use of this additional information can have the following additional potential consequences:
       </t>
       <ul spacing="normal">
         <li>
