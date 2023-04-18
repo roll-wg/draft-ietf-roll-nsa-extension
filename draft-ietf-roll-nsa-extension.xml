@@ -326,7 +326,9 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <name>Common Ancestor Objective Function</name>
       <t>
         An OF which allows the multiple paths to remain correlated is detailed here.
-        More specifically, when using this OF a node will select an AP node close to its PP node to allow the operation of overhearing between parents.
+        More specifically, when using this OF a node will select an AP node "close" to its PP node to allow the operation of overhearing between parents.
+        Closeness here is not strictly defined, however, the premise is that those candidate parent nodes that have common parents themselves have a higher probability of being within each other's radio range, though it's of course not guaranteed.
+        
         For more details about overhearing and its use in this context see the "Complex Track with Replication and Elimination" in <xref target="RFC9030" sectionFormat="of" section="4.5.3"/>.
         If multiple potential APs match this condition, the AP with the lowest rank will be registered.
       </t>
