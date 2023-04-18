@@ -171,16 +171,16 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <dd>
                 Defined in <xref target="RFC6550">RPL</xref>.
         </dd>
-      </dl>
-      <t>
-        The draft uses the following Terminology:
-      </t>
-      <dl newline="false" spacing="normal">
         <dt>Packet Replication and Elimination (PRE):</dt>
         <dd>
                 A method that consists of transmitting multiple copies of a packet using multi-path forwarding over a multi-hop network and that consolidates multiple received packet copies to control flooding.
                 See "Complex Track with Replication and Elimination" in <xref target="RFC9030" sectionFormat="of" section="4.5.3"/> for more details.
         </dd>
+      </dl>
+      <t>
+        The draft introduces the following Terminology:
+      </t>
+      <dl newline="false" spacing="normal">
         <dt>Alternative Parent (AP):</dt>
         <dd>
                 An RPL parent in the parent set of a node is used to forward a packet copy when replicating packets.
