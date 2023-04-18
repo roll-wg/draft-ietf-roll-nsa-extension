@@ -199,7 +199,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <name>Common Ancestor AP Selection Policies</name>
       <t>
         In the RPL protocol, each node maintains a list of potential parents. 
-        When more than one parent is required, as when performing PRE, the RPL DODAG Preferred Parent node is used.
+        When more than one parent is required, as when performing PRE, the RPL DODAG Preferred Parent node is used, as per <xref target="RFC6550">RPL</xref> parent selection, effectively depending on the OF used.
+        If the CA OF is used, the way this choice is made is described in <xref target="ca_of" />.
         Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network selects one or more parents, called Alternative Parents (APs), from its Parent Set (PS).
       </t>
       <t>
@@ -334,7 +335,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       </t>
       <t>
         The OF described here is an extension of <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function (MRHOF)</xref>.
-        In general, this OF extends MRHOF by specifying how an AP is selected.
+        In general, this OF extends MRHOF by specifying how an AP is selected while the selection and switching of the PP remain unaltered.
         Importantly, the calculation of the rank of the node through each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
       </t>
       <t>
