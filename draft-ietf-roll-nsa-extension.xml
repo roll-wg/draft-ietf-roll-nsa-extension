@@ -210,7 +210,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <t>
         In the RPL protocol, each node maintains a list of potential parents. 
         When more than one parent is required, as when performing PRE, the RPL DODAG Preferred Parent node is used.
-        Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network selects some additional parent(s), called alternative parent(s), from its Parent Set (PS).
+        Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network selects one or more parents, called Alternative Parents (APs), from its Parent Set (PS).
       </t>
       <t>
         There are multiple possible policies for selecting the AP node.
@@ -221,7 +221,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         A more restrictive policy will limit flooding but might fail to select an appropriate AP, while a less restrictive one will more often find an appropriate AP but might increase flooding.
       </t>
       <t>
-        All three policies apply their corresponding common ancestor criterion to filter the list of candidate neighbors in the alternative parent set.
+        All three policies apply their corresponding common ancestor criterion to filter the list of candidate neighbors in the Alternative Parent set.
       </t>
       <section anchor="sec_ca_strict" numbered="true" toc="default">
         <name>Common Ancestor Strict</name>
@@ -375,7 +375,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
                 Same as MRHOF extended to AP selection.
                 If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD (the same variable as MRHOF uses), the node MAY continue to use the current AP.
                 Additionally, if there is no PP selected, there MUST NOT be any AP selected as well.
-                Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its alternative parent set.
+                Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its Alternative Parent set.
                 The value of PARENT_SET_SIZE is the same as in MRHOF.
         </dd>
         <dt><xref target="RFC6719" sectionFormat="comma" section="3.3" /> "Computing Rank":</dt>
@@ -436,8 +436,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <section numbered="true" toc="default">
         <name>Usage</name>
         <t>
-            All the OF policies apply their corresponding criterion to filter the list of candidate neighbors in the alternative parent set.
-            The AP is then selected from the alternative parent set based on Rank and using hysteresis as is done for the PP in MRHOF.
+            All the OF policies apply their corresponding criterion to filter the list of candidate neighbors in the Alternative Parent set.
+            The AP is then selected from the Alternative Parent set based on Rank and using hysteresis as is done for the PP in MRHOF.
             It is noteworthy that the OF uses the same Objective Code Point (OCP): TBD1 for all policies used.
         </t>
         <t>
