@@ -339,7 +339,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         Importantly, the calculation of the rank of the node through each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
       </t>
       <t>
-        How the CA OF modifies MRHOF in a section-by-section manner follows in detail:
+        How the CA OF differs from MRHOF in a section-by-section manner follows in detail:
       </t>
       <dl newline="true" spacing="normal">
         <dt><xref target="RFC6719" sectionFormat="comma" section="2" />: "Terminology". Term "Selected Metric":</dt>
