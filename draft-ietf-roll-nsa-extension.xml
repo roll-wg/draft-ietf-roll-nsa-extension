@@ -616,16 +616,16 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <section numbered="true" toc="default">
       <name>IANA Considerations</name>
       <t>
-        This proposal requests the allocation of a new value TBD1 from the "Objective Code Point (OCP)" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry.
+        This document requests the allocation of a new value TBD1 from the "Objective Code Point (OCP)" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry.
       </t>
       <t>
-        This proposal also requests the allocation of a new value TBD2 for the "Parent Set" TLV from the "Routing Metric/Constraint TLVs" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL) Routing Metric/Constraint" registry.
+        This document also requests the allocation of a new value TBD2 for the "Parent Set" TLV from the "Routing Metric/Constraint TLVs" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL) Routing Metric/Constraint" registry.
       </t>
     </section>
     <section title="Acknowledgments">
           <t>
               We are very grateful to Dominique Barthel, Rahul Jadhav, Fabrice Theoleyre, Diego Dujovne, Derek Jianqiang Hou, and Michael Richardson for their comments, feedback, and support which lead to many improvements to this document.
-              We would also like to thank Tomas Lagos Jenschke very much for helping in the implementation and evaluation of the proposals of this document.
+              We would also like to thank Tomas Lagos Jenschke very much for helping in the implementation and evaluation of this document.
           </t>
     </section>
 
