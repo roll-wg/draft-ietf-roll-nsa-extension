@@ -335,7 +335,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       </t>
       <t>
         The OF described here is an extension of <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function (MRHOF)</xref>.
-        In general, this OF extends MRHOF by specifying how an AP is selected while the selection and switching of the PP remain unaltered.
+        The CA OF does not update <xref target="RFC6719"/>. 
+        Rather, it uses the existing definition of MRHOF in <xref target="RFC6719"/> to build a new OF (with a new Objective Code Point (OCP)) which provides additional functionality, while maintaining compatibility by retaining the existing functionality of MRHOF for the preferred parent.
+
+        To be precise, this OF extends MRHOF by specifying how an AP is selected while the selection and switching of the PP remain unaltered.
         Importantly, the calculation of the rank of the node through each candidate neighbor and the selection of the PP is kept the same as in MRHOF.
       </t>
       <t>
