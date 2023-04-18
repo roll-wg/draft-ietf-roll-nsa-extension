@@ -642,6 +642,8 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6550.xml"/>
         <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6551.xml"/>
+        <!-- The Minimum Rank with Hysteresis Objective Function -->
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6719.xml"/>
         <!-- Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
       </references>
@@ -653,8 +655,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8557.xml"/>
         <!-- Objective Function Zero for the Routing Protocol for Low-Power and Lossy Networks (RPL) -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6552.xml"/>
-        <!-- The Minimum Rank with Hysteresis Objective Function -->
-        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6719.xml"/>
         <!-- IPv6 over Low-Power Wireless Personal Area Network (6LoWPAN) Routing Header -->
         <!-- <?rfc include="reference.RFC.8138"?> -->
         <!-- 6TiSCH: Minimal 6TiSCH Configuration -->
