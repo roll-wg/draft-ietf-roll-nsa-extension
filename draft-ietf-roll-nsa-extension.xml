@@ -389,7 +389,9 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </dd>
         <dt><xref target="RFC6719" sectionFormat="comma" section="3.5" /> "Working without Metric Containers":</dt>
         <dd>
-                It is not possible to work without metric containers, since CA AP selection requires information from parents regarding their parent sets, which is transmitted via the NSA object in the DIO Metric Container.
+                The CA OF can work without metric containers identically to MRHOF. 
+                Nodes that transmit DIO messages without the Metric Container will never be selected as an AP by the CA OF of another node but can be selected as the PP as per the operation of MRHOF.
+                Effectively, the lack of Metric Containers is equivalent to operating with a Parent Set TLV where there are no PS IPv6 addresses and the PS Length is 0.
         </dd>
         <dt><xref target="RFC6719" sectionFormat="comma" section="4" /> "Using MRHOF for Metric Maximization":</dt>
         <dd>
