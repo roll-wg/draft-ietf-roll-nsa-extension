@@ -515,7 +515,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <t>
             The structure of the DAG Metric Container data in the form of a Node State and Attribute (NSA) object with a TLV in the NSA Optional TLVs field is shown in <xref target="fig_dagmc"/>.
             The first 32 bits comprise the DAG Metric Container header and all the following bits are part of the Node State and Attribute object body, as defined in <xref target="RFC6551"/>.
-            This document defines a new TLV, which MAY be carried in the Node State and Attribute (NSA) object Optional TLVs field. 
+            This document defines a new TLV, which MUST be carried in the Node State and Attribute (NSA) object Optional TLVs field within the context of the use of the CA OF. 
             The TLV is named Parent Set and is abbreviated as PS in <xref target="fig_dagmc"/>.
       </t>
       <dl newline="false" spacing="normal" indent="6">
