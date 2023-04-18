@@ -436,7 +436,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <t>
             All the Common Ancestor AP Selection Policies (<xref target="ca_policies"/>) apply their corresponding criterion to filter the list of candidate neighbors in the Alternative Parent set.
             The AP is then selected from the Alternative Parent set based on Rank and using hysteresis as is done for the PP in MRHOF.
-            It is noteworthy that the OF uses the same Objective Code Point (OCP): TBD1 for all policies used.
+            It is noteworthy that the OF uses the same Objective Code Point (OCP): (TBD1) for all policies used.
         </t>
         <t>
             The PS information can be used by any of the described AP selection policies or other ones not described here, depending on requirements.
@@ -518,7 +518,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <dt>PS type:</dt>
         <dd>
                     The type of the Parent Set TLV.
-                    The value is TBD2.
+                    The value is (TBD2).
         </dd>
         <dt>PS Length:</dt>
         <dd>
@@ -614,10 +614,10 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <section numbered="true" toc="default">
       <name>IANA Considerations</name>
       <t>
-        This document requests the allocation of a new value TBD1 from the "Objective Code Point (OCP)" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry.
+        This document requests the allocation of a new value (TBD1) from the "Objective Code Point (OCP)" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry.
       </t>
       <t>
-        This document also requests the allocation of a new value TBD2 for the "Parent Set" TLV from the "Routing Metric/Constraint TLVs" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL) Routing Metric/Constraint" registry.
+        This document also requests the allocation of a new value (TBD2) for the "Parent Set" TLV from the "Routing Metric/Constraint TLVs" sub-registry of the "Routing Protocol for Low Power and Lossy Networks (RPL) Routing Metric/Constraint" registry.
       </t>
     </section>
     <section title="Acknowledgments">
