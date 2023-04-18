@@ -558,10 +558,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
           The presence of a PS Length value that is not a multiple of 16 or larger than 240 MUST render the Parent Set TLV invalid. 
           This case MUST be handled the same as a valid Parent Set TLV with no addresses in the PS IPv6 address(es).
       </t>
-      <t>    
-        It is important to highlight that the PS does not affect the calculation of the rank through candidate neighbors.
-            It is only used with the CA OF to remove nodes that do not fulfill the CA OF criteria from the candidate neighbor list.
-        </t>
         <!--<section title="DAG Metric Container fields">
             <t>
                 Given the intended usage, when using the PS, the NSA object it is contained in MUST be used as a constraint in the DAG Metric Container.
