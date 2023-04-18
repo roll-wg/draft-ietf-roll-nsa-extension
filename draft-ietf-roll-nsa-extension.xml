@@ -603,10 +603,6 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       </t>
       <ul spacing="normal">
         <li>
-                A malicious node that can receive and read the DIO can "see" further than its neighborhood by one hop, learning the addresses of its two-hop neighbors.
-                This is a privacy/network discovery issue.
-        </li>
-        <li>
                 A malicious node that can send DIOs can use the parent set extension to convince neighbors to route through itself, instead of the normal preferred parent they would use.
                 However, this is already possible with other OFs (like <xref target="RFC6552">OF0</xref> and <xref target="RFC6719">MRHOF</xref>) by reporting a fake rank value in the DIO, thus masquerading as the DODAG root.
         </li>
