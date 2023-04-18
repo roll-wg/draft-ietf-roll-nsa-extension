@@ -209,7 +209,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <name>Common Ancestor AP Selection Policies</name>
       <t>
         In the RPL protocol, each node maintains a list of potential parents. 
-        For PRE, the Preferred Parent (PP) node is defined to be the same as the RPL DODAG Preferred Parent node. 
+        When more than one parent is required, as when performing PRE, the RPL DODAG Preferred Parent node is used.
         Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network selects some additional parent(s), called alternative parent(s), from its Parent Set (PS).
       </t>
       <t>
