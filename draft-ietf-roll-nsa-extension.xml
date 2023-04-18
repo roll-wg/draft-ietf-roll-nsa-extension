@@ -372,7 +372,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <dd>
                 Same as MRHOF extended to AP selection.
                 If the smallest path cost for paths through the candidate neighbors is smaller than cur_ap_min_path_cost by less than PARENT_SWITCH_THRESHOLD (the same variable as MRHOF uses), the node MAY continue to use the current AP.
-                Additionally, if there is no PP selected, there MUST NOT be any AP selected as well.
+                Additionally, if there is no PP selected, there MUST NOT be any AP selected either.
                 Finally, as with MRHOF, a node MAY include up to PARENT_SET_SIZE-1 additional candidate neighbors in its Alternative Parent set.
                 The value of PARENT_SET_SIZE is the same as in MRHOF.
         </dd>
