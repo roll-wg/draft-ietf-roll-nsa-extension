@@ -195,7 +195,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </dd>
       </dl>
     </section>
-    <section numbered="true" toc="default">
+    <section numbered="true" toc="default" anchor="ca_policies">
       <name>Common Ancestor AP Selection Policies</name>
       <t>
         In the RPL protocol, each node maintains a list of potential parents. 
@@ -434,7 +434,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <section numbered="true" toc="default">
         <name>Usage</name>
         <t>
-            All the OF policies apply their corresponding criterion to filter the list of candidate neighbors in the Alternative Parent set.
+            All the Common Ancestor AP Selection Policies (<xref target="ca_policies"/>) apply their corresponding criterion to filter the list of candidate neighbors in the Alternative Parent set.
             The AP is then selected from the Alternative Parent set based on Rank and using hysteresis as is done for the PP in MRHOF.
             It is noteworthy that the OF uses the same Objective Code Point (OCP): TBD1 for all policies used.
         </t>
