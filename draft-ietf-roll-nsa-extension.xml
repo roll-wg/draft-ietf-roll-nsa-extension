@@ -412,7 +412,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
             <dd>
                         Corresponding to the MRHOF parent set.
                         The size is defined by the same PARENT_SET_SIZE parameter as in MRHOF.
-                        The Alternative parent set MUST be a non-strict subset of the parent set.
+                        The Alternative parent set MUST be a strict subset of the parent set.
             </dd>
             <dt>cur_ap_min_path_cost:</dt>
             <dd>
