@@ -272,7 +272,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </ul>
         <t>
             
-            node S can decide to use node B as its AP node, since PP(PP(S)) = Y = PP(B).
+            Therefore, node S can decide to use node B as its AP node, since PP(PP(S)) = Y = PP(B).
         </t>
       </section>
       <section anchor="sec_ca_medium" numbered="true" toc="default">
@@ -298,7 +298,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </ul>
         <t>
             
-            node S can decide to use node B or D as its AP node.
+          Therefore, S can decide to use node B or D as its AP node.
         </t>
       </section>
       <section anchor="sec_ca_relaxed" numbered="true" toc="default">
@@ -323,7 +323,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </ul>
         <t>
             
-            node S can decide to use node A, B, or D as its AP node.
+          Therefore, S can decide to use one of nodes A, B, or D as its AP node.
         </t>
       </section>
     </section>
