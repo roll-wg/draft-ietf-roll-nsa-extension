@@ -161,7 +161,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <section numbered="true" toc="default">
       <name>Terminology</name>
       <t>
-        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all capitals, as shown here.
       </t>
       <t>
         The draft uses the following Terminology:
@@ -636,15 +636,17 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <name>References</name>
       <references>
         <name>Normative references</name>
+        <!-- Key words for use in RFCs to Indicate Requirement Levels -->
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
         <!-- RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6550.xml"/>
         <!-- Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6551.xml"/>
+        <!-- Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words -->
+        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
       </references>
       <references>
         <name>Informative references</name>
-        <!-- Key words for use in RFCs to Indicate Requirement Levels -->
-        <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
         <!-- Deterministic Networking Architecture -->
         <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8655.xml"/>
         <!-- Deterministic Networking Problem Statement -->
