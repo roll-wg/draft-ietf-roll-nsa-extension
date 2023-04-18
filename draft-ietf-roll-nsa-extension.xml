@@ -356,7 +356,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         <dt><xref target="RFC6719" sectionFormat="comma" section="3.1" /> "Computing the Path Cost":</dt>
         <dd>
                 Same as MRHOF extended to AP selection.
-                If a candidate neighbor does not fulfill the CA requirement then the path through that neighbor SHOULD be set to MAX_PATH_COST, the same value used by MRHOF.
+                If a candidate neighbor does not fulfill the CA requirement then the path cost through that neighbor SHOULD be set to MAX_PATH_COST, the same value used by MRHOF.
                 As a result, the node MUST NOT select the candidate neighbor as its AP.
         </dd>
         <dt><xref target="RFC6719" sectionFormat="comma" section="3.2" /> "Parent Selection":</dt>
