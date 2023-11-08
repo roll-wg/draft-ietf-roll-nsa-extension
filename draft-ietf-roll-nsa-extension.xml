@@ -553,11 +553,11 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </t>
         <t>
             The presence of incorrectly configured flags MUST render the Parent Set TLV invalid. 
-            This case MUST be handled the same as having valid flags and a valid Parent Set TLV with no addresses in the PS IPv6 address(es).
+            This case MUST be handled equivalently to operating with a Parent Set TLV where there are no PS IPv6 addresses and the PS Length is 0.
         </t>
         <t>
           The presence of a PS Length value that is not a multiple of 16 or larger than 240 MUST render the Parent Set TLV invalid. 
-          This case MUST be handled the same as a valid Parent Set TLV with no addresses in the PS IPv6 address(es).
+          This case MUST be handled equivalently to operating with a Parent Set TLV where there are no PS IPv6 addresses and the PS Length is 0.
       </t>
         <!--<section title="DAG Metric Container fields">
             <t>
