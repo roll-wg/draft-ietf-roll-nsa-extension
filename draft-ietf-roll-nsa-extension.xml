@@ -215,7 +215,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         All three policies apply their corresponding common ancestor criterion to filter the list of candidate neighbors in the Alternative Parent set.
       </t>
       <t>
-        If after the filtering there are multiple condition-meeting candidate nodes, the node MUST decide to use at least one of them as its AP node. 
+        If after the filtering there are multiple condition-meeting candidate nodes, the node MUST select at least one of them as its AP node. 
         The way this choice is made depends on which OF is used. 
         If the CA OF is used, the way this choice is made is described in <xref target="ca_of" />.
       </t>
@@ -268,7 +268,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </ul>
         <t>
             
-            Therefore, node S MUST decide to use node B as its AP node, since PP(PP(S)) = Y = PP(B).
+            Therefore, node S MUST select node B as its AP node, since PP(PP(S)) = Y = PP(B).
         </t>
       </section>
       <section anchor="sec_ca_medium" numbered="true" toc="default">
@@ -294,7 +294,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </ul>
         <t>
             
-          Therefore, S MUST decide to use at least one node among B and D as its AP node.
+          Therefore, S MUST select at least one node among B and D as its AP node.
         </t>
       </section>
       <section anchor="sec_ca_relaxed" numbered="true" toc="default">
@@ -319,7 +319,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         </ul>
         <t>
             
-          Therefore, S MUST decide to use at least one node among A, B, and D as its AP node.
+          Therefore, S MUST select at least one node among A, B, and D as its AP node.
         </t>
       </section>
     </section>
