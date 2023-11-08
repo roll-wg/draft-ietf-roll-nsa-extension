@@ -623,10 +623,12 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
     <section numbered="true" toc="default">
       <name>IANA Considerations</name>
       <t>
-        This document requests the allocation of a new value (TBD1) from the "Objective Code Point (OCP)" registry in the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry group.
+        This document requests the allocation of a new value (TBD1) from the "Objective Code Point (OCP)" registry in the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry group. 
+        The Description field should have the value "Common Ancestor Objective Function (CAOF)".
       </t>
       <t>
         This document also requests the allocation of a new value (TBD2) for the "Parent Set" TLV from the "Routing Metric/Constraint TLVs" registry in the "Routing Protocol for Low Power and Lossy Networks (RPL) Routing Metric/Constraint" registry group.
+        The Description field should have the value "Parent Set".
       </t>
     </section>
     <section title="Acknowledgments">
