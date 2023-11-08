@@ -331,7 +331,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
         Closeness here is not strictly defined, however, the premise is that those candidate parent nodes that have common parents themselves have a higher probability of being within each other's radio range, though it's of course not guaranteed.
         
         For more details about overhearing and its use in this context see the "Complex Track with Replication and Elimination" in <xref target="RFC9030" sectionFormat="of" section="4.5.3"/>.
-        If multiple potential APs match this condition, the AP with the lowest rank will be registered.
+        If multiple potential APs match this condition, one of the APs with the lowest rank will be registered, with the choice between multiple nodes with the same lowest rank being implementation-specific.
       </t>
       <t>
         The OF described here is an extension of <xref target="RFC6719">The Minimum Rank with Hysteresis Objective Function (MRHOF)</xref>.
