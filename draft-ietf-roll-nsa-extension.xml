@@ -543,7 +543,7 @@ based on timeslots to allow deterministic medium access as well as channel hoppi
       <section numbered="true" toc="default">
         <name>Usage</name>
         <t>
-            The PS SHOULD be used in the process of parent selection, and especially in AP selection since it can help the alternative path to not significantly deviate from the preferred path.
+            The PS is used in the process of parent selection, and especially in AP selection since it can help the alternative path to not significantly deviate from the preferred path.
             The Parent Set is information local to the node that broadcasts it.
         </t>
         <t>
