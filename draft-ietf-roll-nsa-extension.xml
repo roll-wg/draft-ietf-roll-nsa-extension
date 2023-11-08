@@ -21,13 +21,13 @@
 <?rfc authorship="yes"?>
 <?rfc tocappendix="yes"?>
 <!DOCTYPE rfc []>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-11" obsoletes="" updates="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="3" symRefs="true" sortRefs="true" version="3" consensus="true">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" ipr="trust200902" docName="draft-ietf-roll-nsa-extension-12" obsoletes="" updates="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="3" symRefs="true" sortRefs="true" version="3" consensus="true">
   <!-- xml2rfc v2v3 conversion 2.41.0 -->
   <front>
     <title abbrev="CA OF and PS DAG MC Extension">
         Common Ancestor Objective Function and Parent Set DAG Metric Container Extension
     </title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-roll-nsa-extension-11"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-roll-nsa-extension-12"/>
     <author initials="R.-A." surname="Koutsiamanis" fullname="Remous-Aris Koutsiamanis" role="editor">
       <organization>IMT Atlantique</organization>
       <address>
