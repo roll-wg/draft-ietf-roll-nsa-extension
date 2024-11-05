@@ -1,6 +1,6 @@
 ---
-title: Common Ancestor Objective Function and Parent Set DAG Metric Container Extension
-abbrev: CA OF and PS DAG MC Extension
+title: Common Ancestor Policies and Parent Set DAG Metric Container Extension
+abbrev: CA policies and PS DAG MC Extension
 docname: draft-ietf-roll-nsa-extension-12
 
 ipr: trust200902
@@ -86,7 +86,7 @@ informative:
 
 --- abstract
 
-High reliability and low jitter can be achieved by being able to send data packets through multiple paths, via different parents, in a network. This document details how to exchange the necessary information within RPL control packets to let a node better select the different parents that will be used to forward a packet over different paths. This document also describes the Objective Function which takes advantage of this information to implement multi-path routing.
+High reliability and low jitter can be achieved by being able to send data packets through multiple paths, via different parents, in a network. This document details how to exchange the necessary information within RPL control packets to let a node better select the different parents that will be used to forward a packet over different paths. This document also describes how to apply Common Ancestor policies to implement multi-path routing.
 
 --- middle
 
@@ -103,11 +103,13 @@ As an example, to meet this goal, [IEEE Std. 802.15.4](#IEEE802154) provides Tim
 
 Furthermore, the 6TiSCH working group, focusing on IPv6 over IEEE Std. 802.15.4-TSCH, has worked on these issues and produced the ["6TiSCH Architecture"](#RFC9030) to address that case.
 
-Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, a subset of which is used to forward packets. In order to select parents to be part of this subset, the RPL Objective Function (OF) needs additional information. This document describes an OF which implements multi-path routing and specifies the transmission of this specific path information.
+Building a multi-path DODAG can be achieved based on the RPL capability of having multiple parents for each node in a network, a subset of which is used to forward packets. In order to select parents to be part of this subset, the RPL Objective Function (OF) needs additional information. This document describes how to implement multi-path routing by applying Common Ancestor (CA) policies as an orthogonal feature to any OF, and specifies the transmission of this specific path information.
 
-This document describes a new Objective Function (OF) called the Common Ancestor (CA) OF (see {{ca_of}}). A detailed description is given of how the path information is used within the CA OF and how the subset of parents for forwarding packets is selected. This specification defines a new Objective Code Point (OCP) for the CA OF.
+This document describes the Common Ancestor (CA) policies (see {{ca_policies}}). A detailed description is given of how the path information is used within the CA policies and how the subset of parents for forwarding packets is selected.
 
-For the path information, this specification focuses on the extensions to the [DAG Metric Container](#RFC6551) required for supplying to the CA OF a part of the information it needs to operate. This information is the [RPL](#RFC6550) parent address set of a node and it must be sent to potential children of the node. The RPL DIO Control Message is the canonical way of broadcasting this kind of information and therefore its [DAG Metric Container](#RFC6551) field is used to append a Node State and Attribute (NSA) object. The node's parent address set is stored as an optional TLV within the NSA object. This specification defines the type value and structure for the parent address set TLV (see {{PS_TLV}}).
+For the path information, this specification focuses on the extensions to the [DAG Metric Container](#RFC6551) required for supplying to the OF a part of the information it needs to operate.
+
+This information is the [RPL](#RFC6550) parent address set of a node and it must be sent to potential children of the node. The RPL DIO Control Message is the canonical way of broadcasting this kind of information and therefore its [DAG Metric Container](#RFC6551) field is used to append a Node State and Attribute (NSA) object. The node's parent address set is stored as an optional TLV within the NSA object. This specification defines the type value and structure for the parent address set TLV (see {{PS_TLV}}).
 
 # Terminology          {#Terminology}
 
@@ -134,7 +136,7 @@ Preferred Grand Parent (PGP):
 
 # Common Ancestor AP Selection Policies     {#ca_policies}
 
-In the RPL protocol, each node maintains a list of potential parents. When more than one parent is required, as when performing PRE, the RPL DODAG Preferred Parent node is used, as per [RPL](#RFC6550) parent selection, effectively depending on the OF used. If the CA OF is used, the way this choice is made is described in {{ca_of}}. Furthermore, to construct an alternative path toward the root, in addition to the PP node, each node in the network selects one or more parents, called Alternative Parents (APs), from its Parent Set (PS).
+In the RPL protocol, each node maintains a list of potential parents. When more than one parent is required, as when performing PRE, the RPL DODAG Preferred Parent node is used, as per [RPL](#RFC6550) parent selection, effectively depending on the OF used. To construct an alternative path toward the root, in addition to the PP node, each node in the network selects one or more parents, called Alternative Parents (APs), from its Parent Set (PS).
 
 There are multiple possible policies for selecting the AP node. This section details three such possible policies.
 
@@ -142,12 +144,12 @@ All three policies defined perform AP selection based on common ancestors, named
 
 All three policies apply their corresponding common ancestor criterion to filter the list of candidate neighbors in the Alternative Parent set.
 
-If after the filtering there are multiple condition-meeting candidate nodes, the node MUST select at least one of them as its AP node. The way this choice is made depends on which OF is used. If the CA OF is used, the way this choice is made is described in {{ca_of}}.
+If after the filtering there are multiple condition-meeting candidate nodes, the node MUST select at least one of them as its AP node. The way this choice is made depends on the OF used, and SHOULD consider the path cost or metric as defined by the underlying OF.
 
 
 ## Common Ancestor Strict  {#sec_ca_strict}
 
-In the CA Strict OF the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is the same as the PP of the potential AP.
+In the CA Strict policy the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is the same as the PP of the potential AP.
 
 ~~~~
 
@@ -186,7 +188,7 @@ Therefore, node S MUST select node B as its AP node, since PP(PP(S)) = Y = PP(B)
 
 ## Common Ancestor Medium   {#sec_ca_medium}
 
-In the CA Medium OF the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is contained in the PS of the potential AP.
+In the CA Medium policy the node will check if its Preferred Grand Parent (PGP), the PP of its PP, is contained in the PS of the potential AP.
 
 Using the same example, in {{fig_ca_alternative_parent_selection}}, the CA Medium parent selection policy will select an AP for node S for which PP(PP(S)) is in PS(AP). Given that PP(PP(S)) = Y:
 
@@ -199,7 +201,7 @@ Therefore, S MUST select at least one node among B and D as its AP node.
 
 ## Common Ancestor Relaxed
 
-In the CA Relaxed OF the node will check if the Parent Set (PS) of its Preferred Parent (PP) has a node in common with the PS of the potential AP.
+In the CA Relaxed policy the node will check if the Parent Set (PS) of its Preferred Parent (PP) has a node in common with the PS of the potential AP.
 
 Using the same example, in {{fig_ca_alternative_parent_selection}}, the CA Relaxed parent selection policy will select an AP for node S for which PS(PP(S)) has at least one node in common with PS(AP). Given that PS(PP(S)) = {X, Y, Z}:
 
