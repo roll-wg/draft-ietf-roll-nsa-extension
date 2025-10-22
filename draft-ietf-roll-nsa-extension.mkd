@@ -230,7 +230,7 @@ Parent Selection:
 
 Hysteresis Mechanism:
 : - **General Operation**: Some OFs, like MRHOF, use hysteresis to prevent frequent changes in PP selection.
-: - **CA Policies**: A similar hysteresis mechanism can be applied to AP selection to enhance stability. For instance, variables like `cur_ap_min_path_cost` CAN be maintained analogous to the PP selection to support hysteresis for APs.
+: - **CA Policies**: A similar hysteresis mechanism can be applied to AP selection to enhance stability.
 
 Rank Computation:
 : - **General Operation**: The OF computes the Rank of the node based on the Rank of the PP and the metrics used.
