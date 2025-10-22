@@ -1,7 +1,7 @@
 ---
 title: Common Ancestor Policies and Parent Set DAG Metric Container Extension
 abbrev: CA policies and PS DAG MC Extension
-docname: draft-ietf-roll-nsa-extension-12
+docname: draft-ietf-roll-nsa-extension-13
 
 ipr: trust200902
 area: Internet
@@ -70,7 +70,6 @@ normative:
   RFC2119:
   RFC6550:
   RFC6551:
-  RFC6719:
   RFC8174:
 
 informative:
@@ -83,6 +82,7 @@ informative:
   RFC8557:
   RFC8655:
   RFC9030:
+  RFC6719:
 
 --- abstract
 
@@ -176,11 +176,11 @@ In the CA Strict policy the node will check if its Preferred Grand Parent (PGP),
 ~~~~
 {: #fig_ca_alternative_parent_selection title="Example Common Ancestor Strict Alternative Parent Selection policy"}
 
-For example, in {{fig_ca_alternative_parent_selection}}, the source node S must know its grandparent sets through nodes A, B, C, and D. The Parent Sets (PS) and the Preferred Parents (PS) of nodes A, B, C, and D are shown on the side of the figure. The CA Strict parent selection policy will select an AP for node S for which PP(PP(S)) = PP(AP). Given that PP(PP(S)) = Y:
+For example, in {{fig_ca_alternative_parent_selection}}, the source node S must know its grandparent sets through nodes A, B, C, and D. The Parent Sets (PS) and the Preferred Parents (PP) of nodes A, B, C, and D are shown on the side of the figure. The CA Strict parent selection policy will select an AP for node S for which PP(PP(S)) = PP(AP). Given that PP(PP(S)) = Y:
 
 *   Node A: PP(A) = X and therefore it is different than PP(PP(S))
-*   Node B: PS(B) = Y and therefore it is equal to PP(PP(S))
-*   Node D: PS(D) = Z and therefore it is different than PP(PP(S))
+*   Node B: PP(B) = Y and therefore it is equal to PP(PP(S))
+*   Node D: PP(D) = Z and therefore it is different than PP(PP(S))
 
 Therefore, node S MUST select node B as its AP node, since PP(PP(S)) = Y = PP(B).
 
@@ -211,7 +211,7 @@ Using the same example, in {{fig_ca_alternative_parent_selection}}, the CA Relax
 
 Therefore, S MUST select at least one node among A, B, and D as its AP node.
 
-# Applying Common Ancestor Policies to Objective Functions  {#ca_of}
+# Applying Common Ancestor Policies to Objective Functions  {#apply_ca_policies}
 
 An approach which allows the multiple paths to remain correlated is detailed here. More specifically, when applying the CA policies, a node will select an AP node "close" to its PP node to allow the operation of overhearing between parents. Closeness here is not strictly defined, however, the premise is that those candidate parent nodes that have common parents themselves have a higher probability of being within each other's radio range, though it's not guaranteed. For more details about overhearing and its use in this context see the "Complex Track with Replication and Elimination" in {{RFC9030, Section 4.5.3}}. If multiple potential APs match this condition, one of the APs with the lowest rank SHOULD be selected, with the choice between multiple nodes with the same lowest rank being implementation-specific.
 
@@ -267,7 +267,7 @@ DIO messages can carry multiple options, out of which the [DAG Metric Container 
 |                                                               |
 +                            DODAGID                            +
 |                                                               |
-+                                                               +
++
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 | DAGMC Type (2)| DAGMC Length  |                               |
@@ -294,10 +294,10 @@ DIO messages can carry multiple options, out of which the [DAG Metric Container 
 ~~~~
 {: #fig_dagmc title="DAG Metric Container (MC) data with Node State and Attribute (NSA) object body and a TLV"}
 
-The structure of the DAG Metric Container data in the form of a Node State and Attribute (NSA) object with a TLV in the NSA Optional TLVs field is shown in {{fig_dagmc}}. The first 32 bits comprise the DAG Metric Container header and all the following bits are part of the Node State and Attribute object body, as defined in {{RFC6551}}. This document defines a new TLV, which MUST be carried in the Node State and Attribute (NSA) object Optional TLVs field within the context of the use of the CA OF. The TLV is named Parent Set and is abbreviated as PS in {{fig_dagmc}}.
+The structure of the DAG Metric Container data in the form of a Node State and Attribute (NSA) object with a TLV in the NSA Optional TLVs field is shown in {{fig_dagmc}}. The first 32 bits comprise the DAG Metric Container header and all the following bits are part of the Node State and Attribute object body, as defined in {{RFC6551}}. This document defines a new TLV, which MUST be carried in the Node State and Attribute (NSA) object Optional TLVs field within the context of applying the Common Ancestor policies. The TLV is named Parent Set and is abbreviated as PS in {{fig_dagmc}}.
 
 PS type:
-: The type of the Parent Set TLV. The value is (TBD2).
+: The type of the Parent Set TLV. The value is (TBD1).
 
 PS Length:
 : The total length of the TLV value field (PS IPv6 address(es)) in bytes (0 included). The length is an integral multiple of 16, the number of bytes in an IPv6 address.
@@ -322,7 +322,7 @@ PRE is very helpful when the aim is to increase reliability for a certain path, 
 
 # Security Considerations
 
-All the security considerations from {{RFC6550}}, {{RFC6551}}, and {{RFC6719}} apply.
+All the security considerations from {{RFC6550}} and {{RFC6551}} apply.
 
 In this document, the structure of the DIO control message is extended, within the pre-defined DIO options. The additional information is the list of IPv6 addresses of the parent set of the node transmitting the DIO. This use of this additional information can have the following additional potential consequences:
 
@@ -331,9 +331,7 @@ In this document, the structure of the DIO control message is extended, within t
 
 # IANA Considerations
 
-This document requests the allocation of a new value (TBD1) from the "Objective Code Point (OCP)" registry in the "Routing Protocol for Low Power and Lossy Networks (RPL)" registry group. The Description field should have the value "Common Ancestor Objective Function (CAOF)".
-
-This document also requests the allocation of a new value (TBD2) for the "Parent Set" TLV from the "Routing Metric/Constraint TLVs" registry in the "Routing Protocol for Low Power and Lossy Networks (RPL) Routing Metric/Constraint" registry group. The Description field should have the value "Parent Set".
+This document requests the allocation of a new value (TBD1) for the "Parent Set" TLV from the "Routing Metric/Constraint TLVs" registry in the "Routing Protocol for Low Power and Lossy Networks (RPL) Routing Metric/Constraint" registry group. The Description field should have the value "Parent Set".
 
 
 # Acknowledgments
