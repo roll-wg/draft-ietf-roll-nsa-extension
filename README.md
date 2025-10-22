@@ -1,4 +1,4 @@
-# Common Ancestor Objective Function and Parent Set DAG Metric Container Extension 
+# Common Ancestor Policies and Parent Set DAG Metric Container Extension
 
  draft-ietf-roll-nsa-extension 
  
